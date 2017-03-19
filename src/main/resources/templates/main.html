@@ -2,20 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8"/>
-<title>Insert title here</title>
+<title>Main page</title>
 </head>
 <body>
-<h1>HELLO</h1>
 
-<form action="#" th:action="@{/}" th:object="${person}" method=post>
+<form action="#" th:action="@{/people}" th:object="${person}" method="get">
 	<table>
 		<tr>
-			<td><input type="text" th:field="*{firstName}" /></td>
-			<td><input type="submit" value="Submit"/></td>
-			<td><input type="reset" value="Reset"/></td>
-		
-	
+			<td><input type="text" name="search" th:value="${search}"/></td>
+			<td><input type="submit" value="Search"/></td>
+		</tr>
 	</table>
+	
+
 </form>
 </body>
 </html>
