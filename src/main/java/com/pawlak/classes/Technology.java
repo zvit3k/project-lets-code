@@ -14,7 +14,7 @@ public class Technology {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	private TECHNOLOGIES technology;
+	private String technology;
 	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
 	@JoinColumn(name = "school_id")
 	private School school;
@@ -29,11 +29,11 @@ public class Technology {
 		this.id = id;
 	}
 
-	public TECHNOLOGIES getTechnology() {
+	public String getTechnology() {
 		return technology;
 	}
 
-	public void setTechnology(TECHNOLOGIES technology) {
+	public void setTechnology(String technology) {
 		this.technology = technology;
 	}
 
@@ -45,7 +45,7 @@ public class Technology {
 		this.school = school;
 	}
 
-	public Technology(TECHNOLOGIES technology, School school) {
+	public Technology(String technology, School school) {
 		super();
 		this.technology = technology;
 		this.school = school;

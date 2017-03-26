@@ -1,7 +1,6 @@
 package com.pawlak.controllers;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.pawlak.classes.School;
-import com.pawlak.classes.TECHNOLOGIES;
 import com.pawlak.classes.Technology;
-import com.pawlak.repositories.PersonRepository;
+import com.pawlak.repositories.AddressRepository;
 import com.pawlak.repositories.SchoolRepository;
 import com.pawlak.repositories.TechnologyRepository;
 
 @Controller
 public class MyController {
+	@Autowired
+	AddressRepository addressRepository;
 	
 	@Autowired
 	TechnologyRepository technologyRepository;
@@ -45,15 +45,27 @@ public class MyController {
 	@RequestMapping(value="/schools", method=RequestMethod.GET)
 	public String getSchools(Model m){
 		
-		//School s = new School("CODACADEMY",3000,160,"Powstała w 2000 roku");
+		//School s = new School("Sdacademy",3000,120,"Bla bla");
 		//School s = schoolRepository.findById(2L);
-		//Technology t = new Technology(TECHNOLOGIES.CSS, s);
-		//Technology t1 = new Technology(TECHNOLOGIES.HTML, s);
 		
-		//technologyRepository.save(t);
+		//Technology t1 = new Technology("Java",s);
+		//Technology t2 = new Technology("Csharp",s);
+		//Technology t3 = new Technology("Ruby",s);
+		//Address ad1 = new Address("Łódź", "Narutowicza 31","34-345", s);
+		//Address ad2 = new Address("Poznan", "Jezycka 12","22-725", s);
+		
 		//technologyRepository.save(t1);
+		//technologyRepository.save(t2);
+		//technologyRepository.save(t3);
 		
-		//m.addAttribute("schools", schoolRepository.findAll());
+		//addressRepository.save(ad1);
+		//addressRepository.save(ad2);
+		List<Technology> list = technologyRepository.findByTechnologyEquals("Ruby");
+		List<School> schools = new ArrayList<>();
+		for(int i=0;i<list.size();i++){
+			schools.add(list.get(i).getSchool());
+		}
+		m.addAttribute("schools", schools);
 		return "results";
 	}
 }

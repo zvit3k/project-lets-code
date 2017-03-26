@@ -21,6 +21,15 @@ public class Address {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="school_id")
 	private School school;
+	
+	public Address(String city, String street, String postalCode, School school) {
+		super();
+		this.city = city;
+		this.street = street;
+		this.postalCode = postalCode;
+		this.school = school;
+	}
+	
 	public Long getId() {
 		return id;
 	}
