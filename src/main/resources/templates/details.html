@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title></title>
+</head>
+<body>
+
+<table>
+	<tr th:text="${person.name}"/>
+	<tr th:text="${person.surname}"/>
+	<tr th:text="${person.age}"/>	
+</table>
+
+<br/>Back to main page <a th:href="@{'/main'}">click here</a>
+</body>
+</html>

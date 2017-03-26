@@ -8,4 +8,6 @@ import com.pawlak.classes.Person;
 
 public interface PersonRepository extends JpaRepository<Person, Integer>{
 	List<Person> findByAgeLessThan(int age);
+	List<Person> findByNameOrSurname(String name, String surname);
+	Person findById(Long id);
 }

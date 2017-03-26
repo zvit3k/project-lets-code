@@ -8,14 +8,16 @@
 <body>
 <h1>RESULTS</h1>
 <div>
-<table>
-   <tr th:each="p : ${search}">
-      <td th:text="${p.name}"></td>
-      <td th:text="${p.surname}"></td>
-      <td th:text="${p.age}"></td>
-   </tr>
-</table>
+	<table>
+   		<tr th:each="s : ${schools}">
+      		<td th:text="${s.name}"></td>
+      		<td th:text="${s.price}"></td>
+      		<td th:text="${s.numberOfHours}"></td>
+      		<!--  <td><a th:href="@{/details/__${p.id}__}">Details</a></td>-->
+      		
+   		</tr>
+	</table>
 </div>
-
+<br/>Redirect to main page <a th:href="@{'/main'}">click here</a>
 </body>
 </html>
