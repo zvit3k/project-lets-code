@@ -6,8 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pawlak.classes.School;
 import com.pawlak.classes.Technology;
@@ -43,29 +45,21 @@ public class MyController {
 	*/
 	
 	@RequestMapping(value="/schools", method=RequestMethod.GET)
-	public String getSchools(Model m){
+	public String getSchools(@RequestParam (value ="query", required=false)String value,Model m){
 		
-		//School s = new School("Sdacademy",3000,120,"Bla bla");
-		//School s = schoolRepository.findById(2L);
-		
-		//Technology t1 = new Technology("Java",s);
-		//Technology t2 = new Technology("Csharp",s);
-		//Technology t3 = new Technology("Ruby",s);
-		//Address ad1 = new Address("Łódź", "Narutowicza 31","34-345", s);
-		//Address ad2 = new Address("Poznan", "Jezycka 12","22-725", s);
-		
-		//technologyRepository.save(t1);
-		//technologyRepository.save(t2);
-		//technologyRepository.save(t3);
-		
-		//addressRepository.save(ad1);
-		//addressRepository.save(ad2);
-		List<Technology> list = technologyRepository.findByTechnologyEquals("Ruby");
+		List<Technology> list = technologyRepository.findByTechnologyEquals(value);
 		List<School> schools = new ArrayList<>();
 		for(int i=0;i<list.size();i++){
 			schools.add(list.get(i).getSchool());
 		}
 		m.addAttribute("schools", schools);
 		return "results";
+	}
+	
+	@RequestMapping(value="/details/{id}", method=RequestMethod.GET)
+	public String getDetails(@PathVariable Long id, Model m){
+		School s = schoolRepository.findById(id);
+		m.addAttribute("school", s);
+		return "details";
 	}
 }

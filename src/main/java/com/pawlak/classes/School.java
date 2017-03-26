@@ -77,6 +77,12 @@ public class School {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	@Override
+	public String toString() {
+		return "School [id=" + id + ", name=" + name + ", technologies=" + technologies + ", price=" + price
+				+ ", numberOfHours=" + numberOfHours + ", description=" + description + ", cities=" + cities + "]";
+	}
 	
 	
 	

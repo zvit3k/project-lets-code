@@ -2,22 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8"/>
-<title>Let's code!</title>
-
+<title></title>
+<link th:href="@{css/results.css}" href="css/results.css" rel="stylesheet" type="text/css"  />
 </head>
 <body>
-<h1>RESULTS</h1>
+<h2>RESULTS</h2>
 <div>
 	<table>
    		<tr th:each="s : ${schools}">
       		<td th:text="${s.name}"></td>
       		<td th:text="${s.price}"></td>
       		<td th:text="${s.numberOfHours}"></td>
-      		<!--  <td><a th:href="@{/details/__${p.id}__}">Details</a></td>-->
-      		
+      		<td><a th:href="@{/details/__${s.id}__}">Details</a></td>
    		</tr>
 	</table>
 </div>
+
 <br/>Redirect to main page <a th:href="@{'/main'}">click here</a>
 </body>
 </html>
