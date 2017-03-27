@@ -3,7 +3,6 @@ package com.pawlak.classes;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +14,7 @@ public class School {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String name;
-	@OneToMany(mappedBy="school",cascade=CascadeType.PERSIST)
+	@OneToMany(mappedBy="school")
 	private List<Technology> technologies = new ArrayList<>();;
 	private double price;
 	private int numberOfHours;

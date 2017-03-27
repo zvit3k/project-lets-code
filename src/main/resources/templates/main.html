@@ -7,10 +7,11 @@
 </head>
 <body>
 
-<form action="#" th:action="@{/schools}" th:object="${school}" method="get">
+<form action="#" th:action="@{/schools}" method="get">
 	<table>
 		<tr>
-			<td><input type="text" name="query"/></td>
+			<td><input type="text" name="query" th:placeholder="Java"/></td>
+			<!-- <td><input type="text" name="city" th:placeholder="Warszawa"/></td> -->
 			<td><input type="submit" value="Search"/></td>
 		</tr>
 	</table>

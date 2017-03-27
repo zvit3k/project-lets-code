@@ -1,6 +1,5 @@
 package com.pawlak.classes;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,7 +14,7 @@ public class Technology {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String technology;
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "school_id")
 	private School school;
 

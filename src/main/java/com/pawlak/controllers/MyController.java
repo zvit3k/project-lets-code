@@ -27,31 +27,18 @@ public class MyController {
 	
 	@Autowired
 	SchoolRepository schoolRepository;
-	/*
-	@RequestMapping(value="/people", method=RequestMethod.GET)
-	public String getPeopleFrmDB(@RequestParam (value ="query", required=false)String value,Model m){
-		//m.addAttribute("listByAge", personRepo.findByAgeLessThan(age));
-		m.addAttribute("list", personRepo.findByNameOrSurname(value, value));
-		
-		return "results";
-	}*/
-	/*
-	@RequestMapping(value="/details/{id}", method=RequestMethod.GET)
-	public String getDetails(@PathVariable Long id, Model m){
-		Person p = personRepo.findById(id);
-		m.addAttribute("person", p);
-		return "details";
-	}
-	*/
 	
 	@RequestMapping(value="/schools", method=RequestMethod.GET)
-	public String getSchools(@RequestParam (value ="query", required=false)String value,Model m){
+	public String getSchools(@RequestParam (value ="query", required=false)String technology,Model m){
 		
-		List<Technology> list = technologyRepository.findByTechnologyEquals(value);
+		
+		//DZIAŁA, ALE MI SIE NIE PODOBA
+		List<Technology> list = technologyRepository.findByTechnologyEquals(technology);
 		List<School> schools = new ArrayList<>();
 		for(int i=0;i<list.size();i++){
 			schools.add(list.get(i).getSchool());
 		}
+		
 		m.addAttribute("schools", schools);
 		return "results";
 	}
