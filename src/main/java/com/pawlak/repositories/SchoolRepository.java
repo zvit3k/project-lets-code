@@ -8,5 +8,5 @@ import com.pawlak.classes.School;
 
 public interface SchoolRepository extends JpaRepository<School, Integer> {
 	School findById(Long id);
-	List<School> findByTechnologiesEquals(String technology);
+	
 }

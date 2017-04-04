@@ -1,5 +1,6 @@
 package com.pawlak.classes;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,15 +12,16 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Technology {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String technology;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "school_id")
 	private School school;
 
-	public Technology(){}
-	
+	public Technology() {
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -34,6 +36,7 @@ public class Technology {
 
 	public void setTechnology(String technology) {
 		this.technology = technology;
+		
 	}
 
 	public School getSchool() {
@@ -47,7 +50,14 @@ public class Technology {
 	public Technology(String technology, School school) {
 		super();
 		this.technology = technology;
-		this.school = school;
+		this.school=school;
+
 	}
 
+	@Override
+	public String toString() {
+		return "Technology [id=" + id + ", technology=" + technology + ", school=" + school + "]";
+	}
+	
+	
 }

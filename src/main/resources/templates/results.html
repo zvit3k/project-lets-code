@@ -6,18 +6,25 @@
 <!-- <link th:href="@{css/results.css}" href="css/results.css" rel="stylesheet" type="text/css"  /> -->
 </head>
 <body>
-<h2>RESULTS</h2>
+<h3>RESULTS</h3>
+<form action="#" th:action="@{/results/sort}" method="get">
+	<select name="sort">
+		<option th:each="i : ${sorting}" th:value="${i}" th:text="${i}"></option>
+	</select>
+	<input type="submit" value="Sort"/>
+</form>
 <div>
 	<table>
    		<tr th:each="s : ${schools}">
       		<td th:text="${s.name}"></td>
       		<td th:text="${s.price}"></td>
       		<td th:text="${s.numberOfHours}"></td>
-      		<td><a th:href="@{/details/__${s.id}__}">Details</a></td>
+      		<td><a th:href="@{details/__${s.id}__}">Details</a></td>
+      		
    		</tr>
 	</table>
+	
 </div>
-
 <br/>Redirect to main page <a th:href="@{'/main'}">click here</a>
 </body>
 </html>
