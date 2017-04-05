@@ -3,6 +3,7 @@ package com.pawlak.controllers;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,10 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.pawlak.classes.School;
 import com.pawlak.classes.Technology;
 import com.pawlak.repositories.AddressRepository;
-import com.pawlak.repositories.SchoolRepository;
 import com.pawlak.repositories.TechnologyRepository;
+import com.pawlak.service.SchoolService;
 import com.pawlak.service.TechnologyService;
 
 @Controller
@@ -24,42 +26,53 @@ public class MyController {
 	//Controller during tests
 	@Autowired
 	TechnologyService technologyService;
-	@Autowired
-	AddressRepository addressRepository;
 
 	@Autowired
-	TechnologyRepository technologyRepository;
-
-	@Autowired
-	SchoolRepository schoolRepository;
+	SchoolService schoolService;
 
 
 	@RequestMapping(value = "/schools", method = RequestMethod.GET)
 	public String getSchools(@RequestParam(value = "query", required = false) String technology, Model m) {
 		
-		List<String> sortChoice = new ArrayList<>(Arrays.asList(new String("Cena"), new String("Godziny")));
+		List<String> sortingChoice = new ArrayList<>(Arrays.asList(new String("Cena"), new String("Godziny")));
 
 		List<Technology> list2 = technologyService.getTechnology(technology);
 		List<School> schools = new ArrayList<>();
 		for (int i = 0; i < list2.size(); i++) {
 			schools.add(list2.get(i).getSchool());
 		}
-		m.addAttribute("sorting", sortChoice);
+		
+		m.addAttribute("technology", technology);
+		m.addAttribute("sortingChoice", sortingChoice);
 		m.addAttribute("schools", schools);
 		return "results";
 	}
 
 	@RequestMapping(value = "/details/{id}", method = RequestMethod.GET)
 	public String getDetails(@PathVariable Long id, Model m) {
-		m.addAttribute("school", schoolRepository.findById(id));
+		m.addAttribute("school", schoolService.getSchoolById(id));
 		return "details";
 	}
 	
-	@RequestMapping(value = "/results/sort", method = RequestMethod.GET)
-	public String getResultSort(@RequestParam(value="sort", required =false) String val, Model m) {
-		System.out.println(val);
-		m.addAttribute("mozesieuda", val);
-		return "details";
+	@RequestMapping(value = "/sortedResults", method = RequestMethod.GET)
+	public String getResultSort(@RequestParam(value="sort", required =false) String sortingCriteria,
+								@RequestParam(value="technology", required=false)String technology, 
+								Model m) {
+		
+		List<String> sortingChoice = new ArrayList<>(Arrays.asList(new String("Cena"), new String("Godziny")));
+
+		List<Technology> list2 = technologyService.getTechnology(technology);
+		List<School> schools = new ArrayList<>();
+		for (int i = 0; i < list2.size(); i++) {
+			schools.add(list2.get(i).getSchool());
+		}
+		
+		List<School> sortedSchools = schools.stream().sorted((p1,p2) -> {return Double.compare(p2.getPrice(), p1.getPrice());}).collect(Collectors.toList());
+		
+		m.addAttribute("technology", technology);
+		m.addAttribute("sortingChoice", sortingChoice);
+		m.addAttribute("schools", sortedSchools);
+		return "results";
 	}
 
 }

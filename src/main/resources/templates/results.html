@@ -7,12 +7,14 @@
 </head>
 <body>
 <h3>RESULTS</h3>
-<form action="#" th:action="@{/results/sort}" method="get">
+<form action="#" th:action="@{/sortedResults}" method="get">
 	<select name="sort">
-		<option th:each="i : ${sorting}" th:value="${i}" th:text="${i}"></option>
+		<option th:each="i : ${sortingChoice}" th:value="${i}" th:text="${i}"></option>
 	</select>
-	<input type="submit" value="Sort"/>
+	<input type="hidden" name="technology" th:value="${technology}"/>
+	<input type="submit" value="Sortuj"/>
 </form>
+
 <div>
 	<table>
    		<tr th:each="s : ${schools}">
