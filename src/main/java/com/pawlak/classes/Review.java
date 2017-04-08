@@ -5,6 +5,7 @@ import java.util.Calendar;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,31 +15,32 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Review {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String nickname;
-	private String review;
-	private double rating;
-	@Column(columnDefinition="DATE")
+	private String userReview;
+	private int rating;
+	@Column(columnDefinition = "DATE")
 	private Calendar date;
-	@ManyToOne(cascade=CascadeType.PERSIST)
-	@JoinColumn(name="school_id")
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@JoinColumn(name = "school_id")
 	private School school;
-	
-	public Review(){}
 
-	public Review(String nickname, String review, double rating, Calendar date) {
+	public Review() {
+	}
+
+	public Review(String nickname, String userReview, int rating, Calendar date) {
 		this.nickname = nickname;
-		this.review = review;
-		this.rating=rating;
+		this.userReview = userReview;
+		this.rating = rating;
 		this.date = date;
 	}
 
-	public double getRating() {
+	public int getRating() {
 		return rating;
 	}
 
-	public void setRating(double rating) {
+	public void setRating(int rating) {
 		this.rating = rating;
 	}
 
@@ -58,12 +60,12 @@ public class Review {
 		this.nickname = nickname;
 	}
 
-	public String getReview() {
-		return review;
+	public String getUserReview() {
+		return userReview;
 	}
 
-	public void setReview(String review) {
-		this.review = review;
+	public void setUserReview(String userReview) {
+		this.userReview = userReview;
 	}
 
 	public Calendar getDate() {
@@ -82,14 +84,5 @@ public class Review {
 		this.school = school;
 	}
 
-	@Override
-	public String toString() {
-		return "Review [id=" + id + ", nickname=" + nickname + ", review=" + review + ", rating=" + rating + ", date="
-				+ date + ", school=" + school + "]";
-	}
-	
-	
-	
-	
-	
+
 }

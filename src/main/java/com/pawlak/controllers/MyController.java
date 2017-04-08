@@ -1,26 +1,24 @@
 package com.pawlak.controllers;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.Calendar;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pawlak.classes.Address;
+import com.pawlak.classes.Review;
 import com.pawlak.classes.School;
 import com.pawlak.classes.Technology;
 import com.pawlak.helpers.SORTINGCRITERIA;
-import com.pawlak.repositories.SchoolRepository;
 import com.pawlak.service.AddressService;
 import com.pawlak.service.ReviewService;
 import com.pawlak.service.SchoolService;
@@ -45,7 +43,7 @@ public class MyController {
 	@RequestMapping(value = "/schools", method = RequestMethod.GET)
 	public String getSchools(@RequestParam(value = "query", required = false) String city, Model m) {
 		
-		List<String> sortingChoice = new ArrayList<>(Arrays.asList(SORTINGCRITERIA.PRICE.toString(),SORTINGCRITERIA.NUMBEROFHOURS.toString()));
+		List<String> sortingChoice = new ArrayList<>(Arrays.asList(SORTINGCRITERIA.Cena.toString()));
 		//List<String> sortingChoice = new ArrayList<>(Arrays.asList(new String("COS")));
 		
 		List<Address> addresses = addressService.getAddressesEquals(city);
@@ -61,13 +59,37 @@ public class MyController {
 	}
 
 	@RequestMapping(value = "/details/{id}", method = RequestMethod.GET)
-	public String getDetails(@PathVariable Long id, Model m) {
+	public String showDetails(@PathVariable Long id, Model m) {
 		
 		School s = schoolService.getSchoolById(id);
 		
+		List<Review> reviews = s.getReviews();
+		
+		List<Integer> rating = new ArrayList<>(Arrays.asList(
+				new Integer(1), 
+				new Integer(2),
+				new Integer(3),
+				new Integer(4),
+				new Integer(5)));
+		
+		m.addAttribute("review", new Review());
+		m.addAttribute("rating", rating);
+		m.addAttribute("reviews", reviews);
 		m.addAttribute("school", s);
-		m.addAttribute("price", s.getPrice());
 		return "details";
+	}
+	
+	@RequestMapping(value = "/review", method = RequestMethod.POST)
+	public String postDetails(@ModelAttribute Review review, @ModelAttribute(value="id") Long id) {
+		School s = schoolService.getSchoolById(id);
+		
+		Calendar date = Calendar.getInstance();
+		review.setDate(date);
+		Review r = new Review(review.getNickname(),review.getUserReview(), review.getRating(),review.getDate());
+		r.setSchool(s);
+		reviewService.addReview(r);
+		
+		return "done";
 	}
 	
 	@RequestMapping(value = "/sortedResults", method = RequestMethod.GET)
@@ -101,6 +123,8 @@ public class MyController {
 		
 		return "details";
 	}
+	
+	
 	
 
 }

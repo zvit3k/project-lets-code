@@ -1,18 +1,68 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8"/>
-
+<meta charset="UTF-8" />
 <title></title>
 </head>
 <body>
 
-<div><p>DETAILS</p></div>
-<!-- 
-<div th:text="${school.name}"></div>
-<div th:text="${price}"></div>
+	<div>
+		<p>DETAILS</p>
+	</div>
 
- -->
-<br/>Back to main page <a th:href="@{'/main'}">click here</a>
+	<div th:text="${school.name}"></div>
+
+	<h3>Opinie o szkole</h3>
+	<div>
+		<table>
+			<tr>
+				<th>Autor</th>
+				<th>Ocena</th>
+				<th>Opinia</th>
+			</tr>
+			<tr th:each="r : ${reviews}">
+
+				<td th:text="${r.nickname}"></td>
+				<td th:text="${r.rating}"></td>
+				<td th:text="${r.userReview}"></td>
+			</tr>
+		</table>
+	</div>
+
+	<h3>Dodaj opinie o szkole</h3>
+	<form action="#" th:action="@{/review}" th:object="${review}"
+		method="post">
+		<table>
+			<tr>
+				<td>Autor</td>
+				<td><input type="text" th:field="*{nickname}" /></td>
+			</tr>
+			<tr>
+				<td>Twoja ocena:
+					<ul>
+						<li th:each="r : ${rating}"><input type="radio"
+							th:field="*{rating}" th:value="${r}" /> <label th:text="${r}"></label>
+						</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td>Opis:</td>
+				<td><textarea th:field="*{userReview}"></textarea></td>
+			</tr>
+
+			<tr>
+				<td><input type="hidden" th:value="${school.id}" name="id" /></td>
+			</tr>
+
+			<tr>
+				<td><input type="submit" value="Send" /></td>
+				<td><input type="reset" value="Reset" /></td>
+			</tr>
+		</table>
+	</form>
+
+	<br />Back to main page
+	<a th:href="@{'/main'}">click here</a>
 </body>
 </html>
