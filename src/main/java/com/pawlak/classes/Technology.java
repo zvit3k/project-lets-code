@@ -1,13 +1,13 @@
 package com.pawlak.classes;
 
-import javax.persistence.CascadeType;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Technology {
@@ -15,13 +15,16 @@ public class Technology {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String technology;
-	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.PERSIST)
-	@JoinColumn(name = "school_id")
-	private School school;
+	@ManyToMany(mappedBy="technologies")
+	private Set<School> schools = new HashSet<School>();
 
 	public Technology() {
 	}
 
+	public Technology(String technology) {
+		this.technology = technology;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -39,25 +42,20 @@ public class Technology {
 		
 	}
 
-	public School getSchool() {
-		return school;
+	public Set<School> getSchools() {
+		return schools;
 	}
 
-	public void setSchool(School school) {
-		this.school = school;
-	}
-
-	public Technology(String technology, School school) {
-		super();
-		this.technology = technology;
-		this.school=school;
-
+	public void setSchools(Set<School> schools) {
+		this.schools = schools;
 	}
 
 	@Override
 	public String toString() {
-		return "Technology [id=" + id + ", technology=" + technology + ", school=" + school + "]";
+		return "Technology [id=" + id + ", technology=" + technology + ", schools=" + schools + "]";
 	}
+
+
 	
 	
 }

@@ -1,14 +1,17 @@
 package com.pawlak.classes;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -17,11 +20,15 @@ public class School {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String name;
-	@OneToMany(mappedBy = "school", cascade = CascadeType.PERSIST)
-	private List<Technology> technologies = new ArrayList<>();;
+	@ManyToMany
+	@JoinTable(name = "school_technology", joinColumns = { @JoinColumn(name = "school_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "technology_id") })
+	private Set<Technology> technologies = new HashSet<Technology>();;
 	private double price;
 	private int numberOfHours;
 	private String description;
+	@OneToMany(mappedBy="school")
+	private List<Review> reviews = new ArrayList<>();
 	@OneToMany(mappedBy = "school")
 	private List<Address> cities = new ArrayList<>();
 
@@ -36,18 +43,25 @@ public class School {
 	public School() {
 	}
 
-	public Long getId() {
-		return id;
-	}
-
 	public School(String name, double price, int numberOfHours, String description) {
-		super();
 		this.name = name;
 		this.price = price;
 		this.numberOfHours = numberOfHours;
 		this.description = description;
-		
 	}
+
+	public Set<Technology> getTechnologies() {
+		return technologies;
+	}
+
+	public void setTechnologies(Set<Technology> technologies) {
+		this.technologies = technologies;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
 
 	public void setId(Long id) {
 		this.id = id;
@@ -59,14 +73,6 @@ public class School {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public List<Technology> getTechnologies() {
-		return technologies;
-	}
-
-	public void setTechnologies(List<Technology> technologies) {
-		this.technologies = technologies;
 	}
 
 	public double getPrice() {
@@ -93,16 +99,5 @@ public class School {
 		this.description = description;
 	}
 
-	@Override
-	public String toString() {
-		return "School [id=" + id + ", name=" + name + ", technologies=" + technologies + ", price=" + price
-				+ ", numberOfHours=" + numberOfHours + ", description=" + description + ", cities=" + cities + "]";
-	}
-
-	public void addTechnology(Technology tech) {
-		if(!this.getTechnologies().contains(tech)){
-			this.technologies.add(tech);
-		}
-	}
 
 }

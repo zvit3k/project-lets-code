@@ -15,26 +15,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pawlak.classes.School;
 import com.pawlak.classes.Technology;
-import com.pawlak.repositories.AddressRepository;
-import com.pawlak.repositories.TechnologyRepository;
+import com.pawlak.repositories.SchoolRepository;
+import com.pawlak.service.ReviewService;
 import com.pawlak.service.SchoolService;
 import com.pawlak.service.TechnologyService;
 
 @Controller
 // @Transactional
 public class MyController {
-	//Controller during tests
+	
+	@Autowired
+	ReviewService reviewService;
+	
 	@Autowired
 	TechnologyService technologyService;
 
 	@Autowired
 	SchoolService schoolService;
 
+	@Autowired
+	SchoolService schoolSerivce;
 
 	@RequestMapping(value = "/schools", method = RequestMethod.GET)
 	public String getSchools(@RequestParam(value = "query", required = false) String technology, Model m) {
 		
-		List<String> sortingChoice = new ArrayList<>(Arrays.asList(new String("Cena"), new String("Godziny")));
+		/*List<String> sortingChoice = new ArrayList<>(Arrays.asList(new String("Cena"), new String("Godziny")));
 
 		List<Technology> list2 = technologyService.getTechnology(technology);
 		List<School> schools = new ArrayList<>();
@@ -44,13 +49,17 @@ public class MyController {
 		
 		m.addAttribute("technology", technology);
 		m.addAttribute("sortingChoice", sortingChoice);
-		m.addAttribute("schools", schools);
+		m.addAttribute("schools", schools);*/
 		return "results";
 	}
 
 	@RequestMapping(value = "/details/{id}", method = RequestMethod.GET)
 	public String getDetails(@PathVariable Long id, Model m) {
-		m.addAttribute("school", schoolService.getSchoolById(id));
+		
+		School s = schoolService.getSchoolById(id);
+		
+		m.addAttribute("school", s);
+		m.addAttribute("price", s.getPrice());
 		return "details";
 	}
 	
@@ -58,7 +67,7 @@ public class MyController {
 	public String getResultSort(@RequestParam(value="sort", required =false) String sortingCriteria,
 								@RequestParam(value="technology", required=false)String technology, 
 								Model m) {
-		
+		/*
 		List<String> sortingChoice = new ArrayList<>(Arrays.asList(new String("Cena"), new String("Godziny")));
 
 		List<Technology> list2 = technologyService.getTechnology(technology);
@@ -71,8 +80,9 @@ public class MyController {
 		
 		m.addAttribute("technology", technology);
 		m.addAttribute("sortingChoice", sortingChoice);
-		m.addAttribute("schools", sortedSchools);
+		m.addAttribute("schools", sortedSchools);*/
 		return "results";
 	}
+	
 
 }
