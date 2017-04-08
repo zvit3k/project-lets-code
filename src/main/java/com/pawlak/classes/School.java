@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,14 +21,14 @@ public class School {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String name;
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "school_technology", joinColumns = { @JoinColumn(name = "school_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "technology_id") })
 	private Set<Technology> technologies = new HashSet<Technology>();;
 	private double price;
 	private int numberOfHours;
 	private String description;
-	@OneToMany(mappedBy="school")
+	@OneToMany(mappedBy = "school")
 	private List<Review> reviews = new ArrayList<>();
 	@OneToMany(mappedBy = "school")
 	private List<Address> cities = new ArrayList<>();
@@ -61,7 +62,6 @@ public class School {
 	public Long getId() {
 		return id;
 	}
-
 
 	public void setId(Long id) {
 		this.id = id;
@@ -98,6 +98,5 @@ public class School {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 
 }

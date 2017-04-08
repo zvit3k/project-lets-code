@@ -1,9 +1,12 @@
 package com.pawlak.controllers;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.pawlak.classes.Address;
 import com.pawlak.classes.School;
 import com.pawlak.classes.Technology;
+import com.pawlak.helpers.SORTINGCRITERIA;
 import com.pawlak.repositories.SchoolRepository;
+import com.pawlak.service.AddressService;
 import com.pawlak.service.ReviewService;
 import com.pawlak.service.SchoolService;
 import com.pawlak.service.TechnologyService;
@@ -32,24 +38,25 @@ public class MyController {
 
 	@Autowired
 	SchoolService schoolService;
-
+	
 	@Autowired
-	SchoolService schoolSerivce;
+	AddressService addressService;
 
 	@RequestMapping(value = "/schools", method = RequestMethod.GET)
-	public String getSchools(@RequestParam(value = "query", required = false) String technology, Model m) {
+	public String getSchools(@RequestParam(value = "query", required = false) String city, Model m) {
 		
-		/*List<String> sortingChoice = new ArrayList<>(Arrays.asList(new String("Cena"), new String("Godziny")));
-
-		List<Technology> list2 = technologyService.getTechnology(technology);
+		List<String> sortingChoice = new ArrayList<>(Arrays.asList(SORTINGCRITERIA.PRICE.toString(),SORTINGCRITERIA.NUMBEROFHOURS.toString()));
+		//List<String> sortingChoice = new ArrayList<>(Arrays.asList(new String("COS")));
+		
+		List<Address> addresses = addressService.getAddressesEquals(city);
 		List<School> schools = new ArrayList<>();
-		for (int i = 0; i < list2.size(); i++) {
-			schools.add(list2.get(i).getSchool());
+		for(Address a :addresses){
+			schools.add(a.getSchool());
 		}
 		
-		m.addAttribute("technology", technology);
+		m.addAttribute("city", city);
 		m.addAttribute("sortingChoice", sortingChoice);
-		m.addAttribute("schools", schools);*/
+		m.addAttribute("schools", schools);
 		return "results";
 	}
 
@@ -82,6 +89,17 @@ public class MyController {
 		m.addAttribute("sortingChoice", sortingChoice);
 		m.addAttribute("schools", sortedSchools);*/
 		return "results";
+	}
+	
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public String addSchool(Model m) {
+		
+		School s = schoolService.getSchoolById(2L);
+		Technology t = technologyService.getById(4L);
+		s.getTechnologies().add(t);
+		schoolService.addSchool(s);
+		
+		return "details";
 	}
 	
 

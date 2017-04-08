@@ -30,8 +30,13 @@ public class TechnologyServiceImpl implements TechnologyService{
 	}
 
 	@Override
-	public List<Technology> getTechnology(String technology) {
+	public Technology getTechnology(String technology) {
 		return technologyRepository.findByTechnologyEquals(technology);
+	}
+
+	@Override
+	public Technology getById(Long id) {
+		return technologyRepository.findOneById(id);
 	}
 
 }

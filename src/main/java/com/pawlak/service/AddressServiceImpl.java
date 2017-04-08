@@ -1,5 +1,7 @@
 package com.pawlak.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,11 @@ public class AddressServiceImpl implements AddressService{
 	public void deleteAddress(Address s) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<Address> getAddressesEquals(String city) {
+		return addressRepository.findByCityEquals(city);
 	}
 	
 	

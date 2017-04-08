@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.pawlak.classes.Technology;
 
 public interface TechnologyRepository extends JpaRepository<Technology, Integer	>{
-	List<Technology> findByTechnologyEquals(String name);
+	Technology findByTechnologyEquals(String name);
+	Technology findOneById(Long id);
 	
 }

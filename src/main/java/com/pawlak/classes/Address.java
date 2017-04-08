@@ -1,5 +1,6 @@
 package com.pawlak.classes;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,9 +19,11 @@ public class Address {
 	private String city;
 	private String street;
 	private String postalCode;
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.PERSIST,fetch=FetchType.LAZY)
 	@JoinColumn(name="school_id")
 	private School school;
+	
+	public Address(){}
 	
 	public Address(String city, String street, String postalCode, School school) {
 		super();
