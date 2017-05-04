@@ -26,6 +26,8 @@ public class School {
 			@JoinColumn(name = "technology_id") })
 	private Set<Technology> technologies = new HashSet<Technology>();;
 	private double price;
+	// add column / getters, setter 
+	//private double avarageRating;
 	private int numberOfHours;
 	private String description;
 	@OneToMany(mappedBy = "school")

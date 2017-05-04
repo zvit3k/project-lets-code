@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8"/>
 <title></title>
-<!-- <link th:href="@{css/results.css}" href="css/results.css" rel="stylesheet" type="text/css"  /> -->
 </head>
 <body>
 <h3>RESULTS</h3>
@@ -11,7 +10,7 @@
 	<select name="sort">
 		<option th:each="i : ${sortingChoice}" th:value="${i}" th:text="${i}"></option>
 	</select>
-	<input type="hidden" name="technology" th:value="${technology}"/>
+	<input type="hidden" name="city" th:value="${city}"/>
 	<input type="submit" value="Sortuj"/>
 </form>
 

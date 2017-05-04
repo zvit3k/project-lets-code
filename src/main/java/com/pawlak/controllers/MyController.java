@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,7 @@ import com.pawlak.classes.Address;
 import com.pawlak.classes.Review;
 import com.pawlak.classes.School;
 import com.pawlak.classes.Technology;
-import com.pawlak.helpers.SORTINGCRITERIA;
+import com.pawlak.helpers.SortingCriteria;
 import com.pawlak.service.AddressService;
 import com.pawlak.service.ReviewService;
 import com.pawlak.service.SchoolService;
@@ -43,8 +44,11 @@ public class MyController {
 	@RequestMapping(value = "/schools", method = RequestMethod.GET)
 	public String getSchools(@RequestParam(value = "query", required = false) String city, Model m) {
 		
-		List<String> sortingChoice = new ArrayList<>(Arrays.asList(SORTINGCRITERIA.Cena.toString()));
-		//List<String> sortingChoice = new ArrayList<>(Arrays.asList(new String("COS")));
+		List<String> sortingChoice = new ArrayList<>(Arrays.asList(SortingCriteria.Cena.toString(), 
+																	SortingCriteria.Ocena.toString(),
+																	SortingCriteria.Nazwa.toString(),
+																	SortingCriteria.Popularność.toString()));
+	
 		
 		List<Address> addresses = addressService.getAddressesEquals(city);
 		List<School> schools = new ArrayList<>();
@@ -89,42 +93,49 @@ public class MyController {
 		r.setSchool(s);
 		reviewService.addReview(r);
 		
-		return "done";
+		return "details";
 	}
 	
 	@RequestMapping(value = "/sortedResults", method = RequestMethod.GET)
 	public String getResultSort(@RequestParam(value="sort", required =false) String sortingCriteria,
-								@RequestParam(value="technology", required=false)String technology, 
+								@RequestParam(value="city", required=false)String city, 
 								Model m) {
-		/*
-		List<String> sortingChoice = new ArrayList<>(Arrays.asList(new String("Cena"), new String("Godziny")));
+		
+		List<String> sortingChoice = new ArrayList<>(Arrays.asList(SortingCriteria.Cena.toString(), 
+																	SortingCriteria.Ocena.toString(),
+																	SortingCriteria.Nazwa.toString(),
+																	SortingCriteria.Popularność.toString()));
 
-		List<Technology> list2 = technologyService.getTechnology(technology);
+		
+		List<Address> addresses = addressService.getAddressesEquals(city);
 		List<School> schools = new ArrayList<>();
-		for (int i = 0; i < list2.size(); i++) {
-			schools.add(list2.get(i).getSchool());
+		for(Address a :addresses){
+			schools.add(a.getSchool());
+		}
+		List<School> sortedSchools = null;
+		if(sortingCriteria.equals("Cena")){
+			sortedSchools = schools
+					.stream()
+					.sorted((p1,p2) -> {return Double.compare(p1.getPrice(), p2.getPrice());})
+					.collect(Collectors.toList());
+		} else if(sortingCriteria.equals("Ocena")){
+			//NOT YEST IMPLEMENTED
+			//sortedSchools = schools.stream().sorted((p1,p2) -> {return Double.compare(p1.getPrice(), p2.getPrice());}).collect(Collectors.toList());
+
+		}else if(sortingCriteria.equals("Nazwa")){
+			sortedSchools = schools
+					.stream()
+					.sorted((p1,p2) -> {return p1.getName().compareTo(p2.getName());})
+					.collect(Collectors.toList());
+		} else if(sortingCriteria.equals("Popularność")){
+			//NOT YET IMPLEMENTED
 		}
 		
-		List<School> sortedSchools = schools.stream().sorted((p1,p2) -> {return Double.compare(p2.getPrice(), p1.getPrice());}).collect(Collectors.toList());
 		
-		m.addAttribute("technology", technology);
+		m.addAttribute("city", city);
 		m.addAttribute("sortingChoice", sortingChoice);
-		m.addAttribute("schools", sortedSchools);*/
+		m.addAttribute("schools", sortedSchools);
 		return "results";
 	}
 	
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String addSchool(Model m) {
-		
-		School s = schoolService.getSchoolById(2L);
-		Technology t = technologyService.getById(4L);
-		s.getTechnologies().add(t);
-		schoolService.addSchool(s);
-		
-		return "details";
-	}
-	
-	
-	
-
 }

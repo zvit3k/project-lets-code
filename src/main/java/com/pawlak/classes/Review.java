@@ -26,8 +26,7 @@ public class Review {
 	@JoinColumn(name = "school_id")
 	private School school;
 
-	public Review() {
-	}
+	public Review() {}
 
 	public Review(String nickname, String userReview, int rating, Calendar date) {
 		this.nickname = nickname;

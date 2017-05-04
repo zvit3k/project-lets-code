@@ -1,5 +1,5 @@
 package com.pawlak.helpers;
 
-public enum SORTINGCRITERIA {
-	Cena
+public enum SortingCriteria {
+	Cena, Nazwa, Ocena, Popularność
 }
