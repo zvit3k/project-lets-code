@@ -1,0 +1,100 @@
+/* * {
+  border-style: solid;
+  border-width: 1px;
+} */
+
+body {
+  background-color: #F9F5EF;
+  font-family: 'Raleway', sans-serif;
+}
+
+/* tab color */
+.nav-pills>li>a {
+  /* background-color: #000;  */
+  /* border-color: #000; */
+  color:#21150C;
+}
+
+/* active tab color */
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+  color: #F9F5EF;
+  background-color: #6d8fa8;
+  /* border: 1px solid #000; */
+}
+
+/* hover tab color */
+.nav-pills>li>a:hover {
+  /* border-color: #000000; */
+  background-color: #81abcb;
+}
+
+.jumbotron {
+  display: flex;
+  align-items: center;
+  background-color: #81abcb;
+  background-image: url("http://hub.highspeedtraining.co.uk/wp-content/uploads/2014/01/data-protection-duties.jpg");
+  background-size: cover;
+  background-repeat:no-repeat;
+  background-position: center center;
+  /* height: 500px; */
+}
+
+.jumbotron h1 {
+  font-family: 'Abril Fatface', cursive;
+  font-size: 600%;
+  color:#F9F5EF;
+  text-shadow: 0.04em 0.04em 0.04em #865534;
+}
+
+.jumbotron p {
+  font-size: 150%;
+  font-weight: bold;
+  color:#21150C;
+  text-shadow: 0.02em 0 0.3em #F9F5EF, 0 0.02em 0.3em #F9F5EF, -0.1em 0 0.3em #F9F5EF, 0 -0.02em 0.3em #F9F5EF;
+}
+
+.btn.btn-primary {
+  border-radius: 2px;
+  border: 0px;
+  text-shadow: none;
+  color: #F9F5EF;
+  background-color: #d9a07b;
+}
+
+.btn.btn-primary:hover {
+  color: #F9F5EF;
+  background-color: #865534;
+}
+
+.margin {  
+	margin-top: 1em;
+}
+
+section .row img {
+  margin: 0 0 0px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.panel-default > .panel-heading {
+  color: #F9F5EF;
+  background-color: #6d8fa8;
+  border-color: #6d8fa8;
+}
+
+.panel-default > .panel-body {
+  background-color: #fff;
+  border-color: #6d8fa8;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+/* Extra small devices (767px and down) */
+@media (max-width: 767px) {
+    .row.vertical-align {
+        display: block; /* Turn off the flexible box layout */
+    }
+}
