@@ -7,22 +7,31 @@
 <title>Kodio - welcome!</title>
 </head>
 <body>
+
 	<div>
 
+		<!-- Misio - tutaj menu -->
 		<div>
 			<ul>
 				<li><a th:href="@{'/main'}">Main</a></li>
 				<li><a th:href="@{'/about'}">Projekt</a></li>
+				<li><a th:href="@{'/howto'}">Szkoły</a></li>
 				<li><a th:href="@{'/contact'}">Kontakt</a></li>
 			</ul>
+			<!-- Misio - koniec menu -->
+
+			<img th:src="@{/img/main-hands.jpg}" />
+
 			<form action="#" th:action="@{/schools}" method="get">
 				<table>
 					<tr>
-						<td><input type="text" name="query" th:placeholder="Warszawa"/></td>
-						<td><input type="submit" value="Szukaj"/></td>
+						<td><input type="text" name="query" th:placeholder="Warszawa"
+							id="search" /></td>
+						<td><input type="submit" value="Szukaj" id="search-btn" /></td>
 					</tr>
 				</table>
 			</form>
+
 		</div>
 	</div>
 </body>
