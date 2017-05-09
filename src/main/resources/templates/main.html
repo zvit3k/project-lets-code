@@ -1,38 +1,149 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<!--  <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css" />-->
-<meta charset="UTF-8" />
-<title>Kodio - welcome!</title>
+  <title>Kodio - welcome!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Raleway" rel="stylesheet"/>
+<!-- for purpose of Brackets only - to delete later on -->
+  <!--  <link rel="stylesheet" type="text/css" href="/project-lets-code/src/main/resources/static/css/main.css"/> -->
+<!-- end -->
+  <meta charset="UTF-8"/>
+
 </head>
 <body>
+    
+<header class="container">
+  <div class="row vertical-align">
+    <div class="col-md-4">
+<!-- logo -->
+      <img alt="Kodio" src="http://zs2koszalin.pl/images/galeria_foto/logo/logo.png" style="height:100px;"></img>
+    </div>
+    <div class="col-md-8">
+<!-- main menu -->
+      <ul class="nav nav-pills nav-justified nav-filter">
+        <li class="active">
+          <a th:href="@{'/main'}">Strona główna</a>
+        </li>
+        <li>
+          <a th:href="@{'/about'}">Projekt</a>
+        </li>
+        <li>
+          <a th:href="@{'/howto'}">Szkoły programowania</a>
+        </li>
+        <li>
+          <a th:href="@{'/contact'}">Kontakt</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
 
-	<div>
+<section class="jumbotron">
+  <div class="container">
+    <div class="row text-center">
+      <h1>Zostań programistą</h1>
+	  <br/>
+      <p>
+        Ty też możesz grać w piłkarzyki przez 8 godzin dziennie i zarabiać krocie! Wyszukaj najbliższą szkołę programowania i przestaw swoją karierę na właściwe tory.
+      </p>
+      <br/>
+<!-- search bar -->
+      <form class="col-lg-12" action="#" th:action="@{/schools}" method="get">
+        <div class="input-group input-group-lg col-sm-offset-3 col-sm-6">
+          <!-- bar -->
+          <input type="text" name="query" class="center-block form-control input-lg" title="Wyszukaj kurs." placeholder="W jakim mieście chcesz się uczyć?"/>
+          <!-- button -->
+          <span class="input-group-btn"><button class="btn btn-lg btn-primary" type="submit">Szukaj</button></span>
+          <!-- old search bar by zvit3k -->
+            <!-- 
+            <form action="#" th:action="@{/schools}" method="get">
+              <table>
+                <tr>
+                  <td><input type="text" name="query" th:placeholder="Warszawa" id="search"/></td>
+                  <td><input type="submit" value="Szukaj"/></td>
+                </tr>
+              </table>
+            </form>
+             -->
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
 
-		<!-- Misio - tutaj menu -->
-		<div>
-			<ul>
-				<li><a th:href="@{'/main'}">Main</a></li>
-				<li><a th:href="@{'/about'}">Projekt</a></li>
-				<li><a th:href="@{'/howto'}">Szkoły</a></li>
-				<li><a th:href="@{'/contact'}">Kontakt</a></li>
-			</ul>
-			<!-- Misio - koniec menu -->
+<hr/>
 
-			<img th:src="@{/img/main-hands.jpg}" />
+<section class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-default margin">
+        <div class="panel-heading"><h2 class="text-center">
+          Dlaczego kodować?
+        </h2></div>
+        <div class="panel-body"><p class="text-center">
+          'It goes on, you know,' the Hatter continued, 'in this way:— Here the Dormouse shook itself, and began singing in its sleep 'Twinkle, twinkle, twinkle, twinkle—' and went on so long that they had to pinch it to make it stop. 'Well, I'd hardly finished the first verse,' said the Hatter, 'when the Queen jumped up and bawled out, "He's murdering the time! Off with his head!"' 'How dreadfully savage!' exclaimed Alice. 'And ever since that,' the Hatter went on in a mournful tone, 'he won't do a thing I ask! It's always six o'clock 
+        </p></div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="margin"><img src="https://www.teachermagazine.com.au/files/Computing%2C_programming_and_coding_in_schools.jpg"></img></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="margin"><img src="https://softnshare.files.wordpress.com/2016/12/coding-924920_1280.jpg"></img></div>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-default margin">
+        <div class="panel-heading"><h2 class="text-center">
+        A po co wyszukiwać?
+        </h2></div>
+        <div class="panel-body"><p class="text-center">
+        Presently the Rabbit came up to the door, and tried to open it; but, as the door opened inwards, and Alice's elbow was pressed hard against it, that attempt proved a failure. Alice heard it say to itself 'Then I'll go round and get in at the window.' 'THAT you won't' thought Alice, and, after waiting till she fancied she heard the Rabbit just under the window, she suddenly spread out her hand, and made a snatch in the air. She did not get hold of anything, but she heard a little shriek and
+        </p></div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="row text-center">
+    <a class="btn btn-primary" href="#">View Complete Catalogue</a>
+  </div> -->
+</section>
 
-			<form action="#" th:action="@{/schools}" method="get">
-				<table>
-					<tr>
-						<td><input type="text" name="query" th:placeholder="Warszawa"
-							id="search" /></td>
-						<td><input type="submit" value="Szukaj" id="search-btn" /></td>
-					</tr>
-				</table>
-			</form>
+<hr/>
 
-		</div>
-	</div>
+<footer class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <ul class="list-unstyled list-inline">
+        <li>
+          Kontakt
+        </li>
+        <li>
+          O autorze
+        </li>
+        <li>
+          Regulamin
+        </li>
+        <li>
+          Współpraca
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <p>
+        <!-- &lcub &rcub zvit3k -->
+      </p>
+      <p>
+        <!-- &lt &gt SirBishcopt -->
+      </p>
+    </div>
+  </div>
+</footer>
+
+
 </body>
+
 </html>
