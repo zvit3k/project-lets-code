@@ -15,8 +15,11 @@
 </form>
 
 <div>
+<form action="#" th:action="@{/compare}" th:object="${wrapper}" method="post">
 	<table>
-   		<tr th:each="s : ${schools}">
+   		<tr th:each="s, stat : ${wrapper.list}">
+   			<td><input type="checkbox" th:name="|list[${stat.index}].id|" th:value="${s.id}"/><label>Add</label></td>
+      		
       		<td th:text="${s.name}"></td>
       		<td th:text="${s.price}"></td>
       		<td th:text="${s.numberOfHours}"></td>
@@ -25,6 +28,16 @@
    		</tr>
 	</table>
 	
+	<!-- <ul>
+	<li th:each="c : ${countryList}">
+	<input type="checkbox" th:field="*{countryList}" th:value="${c}" />
+	<label th:text="${c}"></label>
+	</li>
+	</ul> -->
+
+	<input type="submit" value="Compare"/>
+</form>
+
 </div>
 <br/>Redirect to main page <a th:href="@{'/main'}">click here</a>
 </body>

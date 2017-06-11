@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.pawlak.classes.Address;
 import com.pawlak.classes.Review;
 import com.pawlak.classes.School;
-import com.pawlak.classes.Technology;
+import com.pawlak.classes.SchoolWrapper;
 import com.pawlak.helpers.SortingCriteria;
 import com.pawlak.service.AddressService;
 import com.pawlak.service.ReviewService;
@@ -52,11 +52,21 @@ public class MyController {
 		
 		List<Address> addresses = addressService.getAddressesEquals(city);
 		List<School> schools = new ArrayList<>();
+		
 		for(Address a :addresses){
 			schools.add(a.getSchool());
+			
+			
 		}
 		
+		//List<School> list = new ArrayList<>();
+		//COMPARISON FEATURE
+		
+		SchoolWrapper wrapper = new SchoolWrapper();
+		wrapper.setList(schools);
+		
 		m.addAttribute("city", city);
+		m.addAttribute("wrapper", wrapper);
 		m.addAttribute("sortingChoice", sortingChoice);
 		m.addAttribute("schools", schools);
 		return "results";
@@ -98,7 +108,7 @@ public class MyController {
 	
 	@RequestMapping(value = "/sortedResults", method = RequestMethod.GET)
 	public String getResultSort(@RequestParam(value="sort", required =false) String sortingCriteria,
-								@RequestParam(value="city", required=false)String city, 
+								@RequestParam(value="city", required=false) String city, 
 								Model m) {
 		
 		List<String> sortingChoice = new ArrayList<>(Arrays.asList(SortingCriteria.Cena.toString(), 

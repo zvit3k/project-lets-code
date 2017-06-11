@@ -108,6 +108,12 @@ public class School {
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}
+
+	@Override
+	public String toString() {
+		return "School [id=" + id + ", name=" + name + ", price=" + price + ", numberOfHours=" + numberOfHours
+				+ ", description=" + description + "]";
+	}
 	
 	
 
