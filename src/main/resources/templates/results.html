@@ -6,6 +6,7 @@
 </head>
 <body>
 <h3>RESULTS</h3>
+
 <form action="#" th:action="@{/sortedResults}" method="get">
 	<select name="sort">
 		<option th:each="i : ${sortingChoice}" th:value="${i}" th:text="${i}"></option>
@@ -18,24 +19,17 @@
 <form action="#" th:action="@{/compare}" th:object="${wrapper}" method="post">
 	<table>
    		<tr th:each="s, stat : ${wrapper.list}">
-   			<td><input type="checkbox" th:name="|list[${stat.index}].id|" th:value="${s.id}"/><label>Add</label></td>
+   			<td><input type="checkbox" th:name="|list[${stat.index}].id|" th:value="${s.id}"/></td>
       		
       		<td th:text="${s.name}"></td>
       		<td th:text="${s.price}"></td>
       		<td th:text="${s.numberOfHours}"></td>
-      		<td><a th:href="@{details/__${s.id}__}">Details</a></td>
+      		<td><a th:href="@{schools/__${s.id}__}">Details</a></td>
       		
    		</tr>
 	</table>
-	
-	<!-- <ul>
-	<li th:each="c : ${countryList}">
-	<input type="checkbox" th:field="*{countryList}" th:value="${c}" />
-	<label th:text="${c}"></label>
-	</li>
-	</ul> -->
 
-	<input type="submit" value="Compare"/>
+	<input type="submit" value="Porownaj zaznaczone"/>
 </form>
 
 </div>

@@ -55,12 +55,7 @@ public class MyController {
 		
 		for(Address a :addresses){
 			schools.add(a.getSchool());
-			
-			
 		}
-		
-		//List<School> list = new ArrayList<>();
-		//COMPARISON FEATURE
 		
 		SchoolWrapper wrapper = new SchoolWrapper();
 		wrapper.setList(schools);
@@ -72,7 +67,7 @@ public class MyController {
 		return "results";
 	}
 
-	@RequestMapping(value = "/details/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/schools/{id}", method = RequestMethod.GET)
 	public String showDetails(@PathVariable Long id, Model m) {
 		
 		School s = schoolService.getSchoolById(id);
@@ -90,11 +85,12 @@ public class MyController {
 		m.addAttribute("rating", rating);
 		m.addAttribute("reviews", reviews);
 		m.addAttribute("school", s);
-		return "details";
+		
+		return "schoolDetails";
 	}
 	
-	@RequestMapping(value = "/review", method = RequestMethod.POST)
-	public String postDetails(@ModelAttribute Review review, @ModelAttribute(value="id") Long id) {
+	@RequestMapping(value = "/addReview", method = RequestMethod.POST)
+	public String postDetails(@ModelAttribute Review review, @ModelAttribute(value="id") Long id, Model model) {
 		School s = schoolService.getSchoolById(id);
 		
 		Calendar date = Calendar.getInstance();
@@ -103,7 +99,9 @@ public class MyController {
 		r.setSchool(s);
 		reviewService.addReview(r);
 		
-		return "details";
+		//model.addAttribute("school", s);
+		
+		return "done";
 	}
 	
 	@RequestMapping(value = "/sortedResults", method = RequestMethod.GET)

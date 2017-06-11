@@ -83,5 +83,11 @@ public class Review {
 		this.school = school;
 	}
 
+	@Override
+	public String toString() {
+		return "Review [id=" + id + ", nickname=" + nickname + ", userReview=" + userReview + ", rating=" + rating
+				+ ", date=" + date + "]";
+	}
+
 
 }
