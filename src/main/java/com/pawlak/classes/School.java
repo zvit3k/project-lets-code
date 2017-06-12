@@ -1,5 +1,7 @@
 package com.pawlak.classes;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -26,8 +28,7 @@ public class School {
 			@JoinColumn(name = "technology_id") })
 	private Set<Technology> technologies = new HashSet<Technology>();;
 	private double price;
-	// add column / getters, setter 
-	//private double avarageRating;
+	private double avarageRating;
 	private int numberOfHours;
 	private String description;
 	@OneToMany(mappedBy = "school")
@@ -37,6 +38,21 @@ public class School {
 
 	public List<Address> getCities() {
 		return cities;
+	}
+
+	public double getAvarageRating() {
+		return avarageRating;
+	}
+
+	public double getAvarageRatingTEST() {
+
+		List<Review> reviews = this.getReviews();
+		avarageRating = 0;
+		for (Review r : reviews) {
+			avarageRating =+ r.getRating();
+		}
+		avarageRating = avarageRating / reviews.size();
+		return avarageRating;
 	}
 
 	public void setCities(List<Address> cities) {
@@ -111,10 +127,8 @@ public class School {
 
 	@Override
 	public String toString() {
-		return "School [id=" + id + ", name=" + name + ", price=" + price + ", numberOfHours=" + numberOfHours
+		return "School [id=" + id + ", name=" + name + ", price=" + price + ", avarageRating=" + avarageRating
 				+ ", description=" + description + "]";
 	}
-	
-	
 
 }

@@ -1,5 +1,6 @@
 package com.pawlak.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,27 +19,28 @@ import com.pawlak.service.SchoolService;
 @RequestMapping
 public class ComparingController {
 
-	
 	@Autowired
 	SchoolService schoolService;
-	
-	@RequestMapping(value="/compare", method = RequestMethod.POST)
-	public String compareSchools(@ModelAttribute SchoolWrapper wrapper, BindingResult bindingResult, Model model){
-		
-		List<School> schools = wrapper.getList();
-		
-		for(School s: schools){
-			School school = schoolService.getSchoolById(s.getId());
-			s.setName(school.getName());
-			s.setDescription(school.getDescription());
-			s.setPrice(school.getPrice());
-			s.setReviews(school.getReviews());
+
+	@RequestMapping(value = "/compare", method = RequestMethod.POST)
+	public String compareSchools(@ModelAttribute SchoolWrapper wrapper, BindingResult bindingResult, Model model) {
+
+		List<School> schools = new ArrayList<>();
+
+		for (School s : wrapper.getList()) {
+			if (s.getId() != null) {
+				School school = schoolService.getSchoolById(s.getId());
+				s.setName(school.getName());
+				s.setDescription(school.getDescription());
+				s.setPrice(school.getPrice());
+				s.setReviews(school.getReviews());
+				schools.add(school);
+			}
 		}
-		
+
 		model.addAttribute("schools", schools);
-		
+
 		return "schoolComparison";
 	}
 
-	
 }
