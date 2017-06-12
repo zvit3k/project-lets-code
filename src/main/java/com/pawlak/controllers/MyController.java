@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +17,7 @@ import com.pawlak.classes.Address;
 import com.pawlak.classes.Review;
 import com.pawlak.classes.School;
 import com.pawlak.classes.SchoolWrapper;
-import com.pawlak.helpers.SortingCriteria;
+import com.pawlak.helpers.SORTINGCRITERIA;
 import com.pawlak.service.AddressService;
 import com.pawlak.service.ReviewService;
 import com.pawlak.service.SchoolService;
@@ -44,8 +42,8 @@ public class MyController {
 	@RequestMapping(value = "/schools", method = RequestMethod.GET)
 	public String getSchools(@RequestParam(value = "query", required = false) String city, Model m) {
 
-		List<String> sortingChoice = new ArrayList<>(Arrays.asList(SortingCriteria.CENA.toString(),
-				SortingCriteria.OCENA.toString(), SortingCriteria.NAZWA.toString()));
+		List<String> sortingChoice = new ArrayList<>(Arrays.asList(SORTINGCRITERIA.CENA.toString(),
+				SORTINGCRITERIA.OCENA.toString(), SORTINGCRITERIA.NAZWA.toString()));
 
 		List<Address> addresses = addressService.getAddressesEquals(city);
 		List<School> schools = new ArrayList<>();
@@ -95,45 +93,6 @@ public class MyController {
 		return "done";
 	}
 
-	@RequestMapping(value = "/sortedResults", method = RequestMethod.GET)
-	public String getResultSort(@RequestParam(value = "sort", required = false) String sortingCriteria,
-			@RequestParam(value = "city", required = false) String city, Model m) {
-
-		List<String> sortingChoice = new ArrayList<>(Arrays.asList(SortingCriteria.CENA.toString(),
-				SortingCriteria.OCENA.toString(), SortingCriteria.NAZWA.toString()));
-
-		List<Address> addresses = addressService.getAddressesEquals(city);
-		List<School> schools = new ArrayList<>();
-		for (Address a : addresses) {
-			schools.add(a.getSchool());
-		}
-		List<School> sortedSchools = null;
-		if (sortingCriteria.equals("CENA")) {
-			sortedSchools = schools.stream().sorted((p1, p2) -> {
-				return Double.compare(p1.getPrice(), p2.getPrice());
-			}).collect(Collectors.toList());
-		} else if (sortingCriteria.equals("OCENA")) {
-			sortedSchools = schools
-					.stream()
-					.sorted((r1, r2) -> {
-								return Double.compare(r1.getAvarageRating(), r2.getAvarageRating());
-								})
-					.collect(Collectors.toList());
-
-		} else if (sortingCriteria.equals("NAZWA")) {
-			sortedSchools = schools.stream().sorted((p1, p2) -> {
-				return p1.getName().compareTo(p2.getName());
-			}).collect(Collectors.toList());
-		}
-
-		SchoolWrapper wrapper = new SchoolWrapper();
-		wrapper.setList(sortedSchools);
-
-		m.addAttribute("city", city);
-		m.addAttribute("sortingChoice", sortingChoice);
-		m.addAttribute("wrapper", wrapper);
-
-		return "results";
-	}
+	
 
 }

@@ -44,14 +44,14 @@ public class School {
 		return avarageRating;
 	}
 
-	public double getAvarageRatingTEST() {
+	public double countAndGetAvarageRating() {
 
 		List<Review> reviews = this.getReviews();
-		avarageRating = 0;
 		for (Review r : reviews) {
-			avarageRating =+ r.getRating();
+			avarageRating = avarageRating + r.getRating();
 		}
 		avarageRating = avarageRating / reviews.size();
+
 		return avarageRating;
 	}
 

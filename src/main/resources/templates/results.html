@@ -1,38 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8"/>
+<meta charset="UTF-8" />
 <title></title>
 </head>
 <body>
-<h3>RESULTS</h3>
+	<h3>RESULTS</h3>
+	<form action="#" th:action="@{/sortedResults}" method="get">
+		<select name="sort">
+			<option th:each="i : ${sortingChoice}" th:value="${i}" th:text="${i}"></option>
+		</select> <input type="hidden" name="city" th:value="${city}" /> <input
+			type="submit" value="Sortuj" />
+	</form>
+	<div>
+		<form action="#" th:action="@{/compare}" th:object="${wrapper}"
+			method="post">
+			<table>
+				<tr th:each="s, stat : ${wrapper.list}">
+					<td><input type="checkbox" th:name="|list[${stat.index}].id|"
+						th:value="${s.id}" /></td>
+					<td th:text="${s.name}"></td>
+					<td th:text="${s.price}"></td>
+					<td th:text="${s.numberOfHours}"></td>
+					<td><a th:href="@{schools/__${s.id}__}">Zobacz</a></td>
+				</tr>
+			</table>
+			<input type="submit" value="Porownaj zaznaczone" />
+		</form>
 
-<form action="#" th:action="@{/sortedResults}" method="get">
-	<select name="sort">
-		<option th:each="i : ${sortingChoice}" th:value="${i}" th:text="${i}"></option>
-	</select>
-	<input type="hidden" name="city" th:value="${city}"/>
-	<input type="submit" value="Sortuj"/>
-</form>
-
-<div>
-<form action="#" th:action="@{/compare}" th:object="${wrapper}" method="post">
-	<table>
-   		<tr th:each="s, stat : ${wrapper.list}">
-   			<td><input type="checkbox" th:name="|list[${stat.index}].id|" th:value="${s.id}"/></td>
-      		
-      		<td th:text="${s.name}"></td>
-      		<td th:text="${s.price}"></td>
-      		<td th:text="${s.numberOfHours}"></td>
-      		<td><a th:href="@{schools/__${s.id}__}">Zobacz</a></td>
-      		
-   		</tr>
-	</table>
-
-	<input type="submit" value="Porownaj zaznaczone"/>
-</form>
-
-</div>
-<br/>Redirect to main page <a th:href="@{'/main'}">click here</a>
+	</div>
+	<br />Redirect to main page
+	<a th:href="@{'/main'}">click here</a>
 </body>
 </html>

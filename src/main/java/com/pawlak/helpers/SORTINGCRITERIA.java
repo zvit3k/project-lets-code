@@ -1,5 +1,5 @@
 package com.pawlak.helpers;
 
-public enum SortingCriteria {
+public enum SORTINGCRITERIA {
 	CENA, NAZWA, OCENA
 }

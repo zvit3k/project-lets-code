@@ -1,5 +1,5 @@
 package com.pawlak.helpers;
 
-public enum CourseType {
+public enum COURSETYPE {
 	ONLINE,BOOTCAMP,WEEKEND,WIECZOROWO,INDYWIDUALNE,GRUPOWE
 }
