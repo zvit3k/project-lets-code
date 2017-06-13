@@ -1,7 +1,5 @@
 package com.pawlak.classes;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -24,12 +22,19 @@ public class School {
 	private Long id;
 	private String name;
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "school_technology", joinColumns = { @JoinColumn(name = "school_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "technology_id") })
+	@JoinTable(name = "school_technology", 
+			joinColumns = { @JoinColumn(name = "school_id") }, 
+			inverseJoinColumns = {@JoinColumn(name = "technology_id") })
 	private Set<Technology> technologies = new HashSet<Technology>();;
 	private double price;
 	private double avarageRating;
 	private int numberOfHours;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "school_courseType", 
+		joinColumns ={ @JoinColumn(name="school_id") }, 
+		inverseJoinColumns ={@JoinColumn(name="courseType_id")})
+	private List<String> courseTypes = new ArrayList<>();
 	private String description;
 	@OneToMany(mappedBy = "school")
 	private List<Review> reviews = new ArrayList<>();
@@ -45,13 +50,11 @@ public class School {
 	}
 
 	public double countAndGetAvarageRating() {
-
 		List<Review> reviews = this.getReviews();
 		for (Review r : reviews) {
 			avarageRating = avarageRating + r.getRating();
 		}
 		avarageRating = avarageRating / reviews.size();
-
 		return avarageRating;
 	}
 
