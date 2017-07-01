@@ -9,8 +9,9 @@
 	<form action="#" th:action="@{/sortedResults}" method="get">
 		<select name="sort">
 			<option th:each="i : ${sortingChoice}" th:value="${i}" th:text="${i}"></option>
-		</select> <input type="hidden" name="city" th:value="${city}" /> <input
-			type="submit" value="Sortuj" />
+		</select>
+		<input type="hidden" name="city" th:value="${city}" /> 
+		<input type="submit" value="Sortuj" />
 	</form>
 	<div>
 		<form action="#" th:action="@{/compare}" th:object="${wrapper}"

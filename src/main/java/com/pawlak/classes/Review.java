@@ -20,8 +20,10 @@ public class Review {
 	private String nickname;
 	private String userReview;
 	private int rating;
+	
 	@Column(columnDefinition = "DATE")
 	private Calendar date;
+	
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinColumn(name = "school_id")
 	private School school;

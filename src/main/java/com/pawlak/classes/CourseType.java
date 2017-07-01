@@ -34,4 +34,10 @@ public class CourseType {
 		this.courseType = courseType;
 	}
 
+	@Override
+	public String toString() {
+		return "" + courseType;
+	}
+	
+	
 }
