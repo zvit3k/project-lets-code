@@ -20,10 +20,10 @@ import com.pawlak.service.AddressService;
 
 @Controller
 public class SortingController {
-	
+
 	@Autowired
 	AddressService addressService;
-	
+
 	@RequestMapping(value = "/sortedResults", method = RequestMethod.GET)
 	public String getResultSort(@RequestParam(value = "sort", required = false) String sortingCriteria,
 			@RequestParam(value = "city", required = false) String city, Model m) {
@@ -37,19 +37,22 @@ public class SortingController {
 			schools.add(a.getSchool());
 		}
 		List<School> sortedSchools = null;
+
 		if (sortingCriteria.equals("CENA")) {
 			sortedSchools = schools.stream().sorted((p1, p2) -> {
 				return Double.compare(p1.getPrice(), p2.getPrice());
 			}).collect(Collectors.toList());
+
 		} else if (sortingCriteria.equals("OCENA")) {
-			sortedSchools = schools
-					.stream()
-					.sorted((s1,s2)-> {return Double.compare(s1.countAndGetAvarageRating(), s2.countAndGetAvarageRating());})
-					.collect(Collectors.toList());
+			sortedSchools = schools.stream().sorted((p1, p2) -> {
+				return Double.compare(p1.countAndGetAvarageRating(), p2.countAndGetAvarageRating());
+			}).collect(Collectors.toList());
+
 		} else if (sortingCriteria.equals("NAZWA")) {
 			sortedSchools = schools.stream().sorted((p1, p2) -> {
-				return p1.getName().compareTo(p2.getName());
+				return p2.getName().compareTo(p1.getName());
 			}).collect(Collectors.toList());
+
 		}
 
 		SchoolWrapper wrapper = new SchoolWrapper();

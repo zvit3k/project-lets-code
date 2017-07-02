@@ -17,11 +17,12 @@
 		<form action="#" th:action="@{/compare}" th:object="${wrapper}"
 			method="post">
 			<table>
-				<tr th:each="s, stat : ${wrapper.list}">
+				<tr th:each="s, stat : ${wrapper.getList()}">
 					<td><input type="checkbox" th:name="|list[${stat.index}].id|"
 						th:value="${s.id}" /></td>
 					<td th:text="${s.name}"></td>
 					<td th:text="${s.price}"></td>
+					<td th:text="${s.courseTypes}"></td>
 					<td th:text="${s.numberOfHours}"></td>
 					<td><a th:href="@{schools/__${s.id}__}">Zobacz</a></td>
 				</tr>
