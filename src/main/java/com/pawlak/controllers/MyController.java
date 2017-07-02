@@ -93,6 +93,18 @@ public class MyController {
 		Review r = new Review(review.getNickname(), review.getUserReview(), review.getRating(), review.getDate());
 		r.setSchool(s);
 		reviewService.addReview(r);
+		
+		//Recounting and setting rating in school
+		double rating = 0;
+		List<Review> reviews = s.getReviews();
+		for(int i = 0; i<reviews.size();i++){
+			rating = rating + reviews.get(i).getRating();
+		}
+		rating = rating / reviews.size();
+		
+		s.setAvarageRating(rating);
+		schoolService.updateSchool(s);
+		
 		return "done";
 	}
 

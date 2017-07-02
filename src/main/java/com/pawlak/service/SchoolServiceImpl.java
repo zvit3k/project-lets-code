@@ -33,4 +33,10 @@ public class SchoolServiceImpl implements SchoolService {
 		return schoolRepository.findById(id);
 	}
 
+	@Override
+	public void updateSchool(School s) {
+		schoolRepository.save(s);
+		
+	}
+
 }

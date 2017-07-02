@@ -56,13 +56,8 @@ public class School {
 		return avarageRating;
 	}
 
-	public double countAndGetAvarageRating() {
-		List<Review> reviews = this.getReviews();
-		for (Review r : reviews) {
-			avarageRating = avarageRating + r.getRating();
-		}
-		avarageRating = avarageRating / reviews.size();
-		return avarageRating;
+	public void setAvarageRating(double avarageRating) {
+		this.avarageRating=avarageRating;
 	}
 
 	public void setCities(List<Address> cities) {

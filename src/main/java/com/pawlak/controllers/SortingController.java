@@ -45,12 +45,12 @@ public class SortingController {
 
 		} else if (sortingCriteria.equals("OCENA")) {
 			sortedSchools = schools.stream().sorted((p1, p2) -> {
-				return Double.compare(p1.countAndGetAvarageRating(), p2.countAndGetAvarageRating());
+				return Double.compare(p1.getAvarageRating(), p2.getAvarageRating());
 			}).collect(Collectors.toList());
 
 		} else if (sortingCriteria.equals("NAZWA")) {
 			sortedSchools = schools.stream().sorted((p1, p2) -> {
-				return p2.getName().compareTo(p1.getName());
+				return p1.getName().compareTo(p2.getName());
 			}).collect(Collectors.toList());
 
 		}
