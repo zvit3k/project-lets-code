@@ -26,11 +26,11 @@ public class CourseType {
 		this.courseType=courseType;
 	}
 
-	public String getCourseTypes() {
+	public String getCourseType() {
 		return courseType;
 	}
 
-	public void setCourseTypes(String courseType) {
+	public void setCourseType(String courseType) {
 		this.courseType = courseType;
 	}
 

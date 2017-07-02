@@ -5,7 +5,7 @@
 <title></title>
 </head>
 <body>
-	<h3>RESULTS</h3>
+<!--  accessing propoerties: th:text="${@environment.getProperty('myPropertyName')}" -->
 	<form action="#" th:action="@{/sortedResults}" method="get">
 		<select name="sort">
 			<option th:each="i : ${sortingChoice}" th:value="${i}" th:text="${i}"></option>
@@ -30,7 +30,12 @@
 					<td th:text="${s.name}"></td>
 					<td th:text="${s.price}"></td>
 					<td th:text="${s.numberOfHours}"></td>
-					<td th:text="${s.courseTypes}"></td>
+					<td>
+						<table>
+							<tr th:each="c : ${s.courseTypes}">
+								<td th:text="${c.courseType}"></td></tr>
+						</table>
+					</td>
 					<td><a th:href="@{schools/__${s.id}__}">Zobacz</a></td>
 				</tr>
 			</table>
@@ -38,7 +43,7 @@
 		</form>
 
 	</div>
-	<br />Redirect to main page
+	<br/>Redirect to main page
 	<a th:href="@{'/main'}">click here</a>
 </body>
 </html>
