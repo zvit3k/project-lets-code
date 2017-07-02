@@ -5,7 +5,7 @@
 <title></title>
 </head>
 <body>
-<!--  accessing propoerties: th:text="${@environment.getProperty('myPropertyName')}" -->
+<!--  accessing properties: th:text="${@environment.getProperty('myPropertyName')}" -->
 	<form action="#" th:action="@{/sortedResults}" method="get">
 		<select name="sort">
 			<option th:each="i : ${sortingChoice}" th:value="${i}" th:text="${i}"></option>
@@ -22,7 +22,7 @@
 					<th>Nazwa</th>
 					<th>Cena</th>
 					<th>Liczba godzin</th>
-					<th>Rodzaj kursów</th>
+					<th>Typ kursu</th>
 				</tr>
 				<tr th:each="s, stat : ${wrapper.getList()}">
 					<td><input type="checkbox" th:name="|list[${stat.index}].id|"
