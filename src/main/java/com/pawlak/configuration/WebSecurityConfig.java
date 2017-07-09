@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/*")
+		http.authorizeRequests().antMatchers("/main", "/results**", "/schools/**", "/sort**", "/compare" )
 		.permitAll()
 		.anyRequest()
 		.authenticated()
@@ -23,6 +23,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("witek").password("pawlak").roles("USER");
+		auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
 	}
 }

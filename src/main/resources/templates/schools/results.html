@@ -6,7 +6,7 @@
 </head>
 <body>
 <!--  accessing properties: th:text="${@environment.getProperty('myPropertyName')}" -->
-	<form action="#" th:action="@{/sortedResults}" method="get">
+	<form action="#" th:action="@{/sort}" method="get">
 		<select name="sort">
 			<option th:each="i : ${sortingChoice}" th:value="${i}" th:text="${i}"></option>
 		</select>

@@ -40,7 +40,7 @@ public class ComparingController {
 
 		model.addAttribute("schools", schools);
 
-		return "schoolComparison";
+		return "/schools/compare";
 	}
 
 }

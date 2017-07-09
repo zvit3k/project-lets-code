@@ -24,7 +24,7 @@ public class SortingController {
 	@Autowired
 	AddressService addressService;
 
-	@RequestMapping(value = "/sortedResults", method = RequestMethod.GET)
+	@RequestMapping(value = "/sort", method = RequestMethod.GET)
 	public String getResultSort(@RequestParam(value = "sort", required = false) String sortingCriteria,
 			@RequestParam(value = "city", required = false) String city, Model m) {
 
@@ -62,6 +62,6 @@ public class SortingController {
 		m.addAttribute("sortingChoice", sortingChoice);
 		m.addAttribute("wrapper", wrapper);
 
-		return "results";
+		return "/schools/results";
 	}
 }

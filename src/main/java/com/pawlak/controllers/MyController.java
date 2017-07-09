@@ -42,7 +42,7 @@ public class MyController {
 	/*@Autowired
 	SchoolRepository sr;*/
 
-	@RequestMapping(value = "/schools", method = RequestMethod.GET)
+	@RequestMapping(value = "/results", method = RequestMethod.GET)
 	public String getSchools(@RequestParam(value = "query", required = false) String city, Model m) {
 
 		List<String> sortingChoice = new ArrayList<>(Arrays.asList(SORTINGCRITERIA.CENA.toString(),
@@ -60,9 +60,8 @@ public class MyController {
 
 		m.addAttribute("city", city);
 		m.addAttribute("wrapper", wrapper);
-		//m.addAttribute("types", schools);
 		m.addAttribute("sortingChoice", sortingChoice);
-		//m.addAttribute("schools", schools);
+		
 		return "/schools/results";
 	}
 
@@ -81,7 +80,7 @@ public class MyController {
 		m.addAttribute("reviews", reviews);
 		m.addAttribute("school", s);
 
-		return "schoolDetails";
+		return "/schools/details";
 	}
 
 	@RequestMapping(value = "/addReview", method = RequestMethod.POST)
@@ -119,8 +118,6 @@ public class MyController {
 		sr.save(s);*/
 
 		return "main";
-	}
-
-	
+	}	
 
 }
