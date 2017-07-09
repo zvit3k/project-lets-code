@@ -63,7 +63,7 @@ public class MyController {
 		//m.addAttribute("types", schools);
 		m.addAttribute("sortingChoice", sortingChoice);
 		//m.addAttribute("schools", schools);
-		return "results";
+		return "/schools/results";
 	}
 
 	@RequestMapping(value = "/schools/{id}", method = RequestMethod.GET)
