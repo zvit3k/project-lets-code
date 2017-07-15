@@ -12,18 +12,21 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/main", "/results**", "/schools/**", "/sort**", "/compare" )
+		http.authorizeRequests()
+		.antMatchers("/main", "/results**", "/schools/**", "/sort**", "/compare")
 		.permitAll()
+		.antMatchers("/css/**").permitAll().anyRequest().permitAll()
 		.antMatchers("/profile").hasAnyRole("USER")
 		.anyRequest()
 		.authenticated()
 		.and()
 		.formLogin()
 		.loginPage("/login").permitAll().and().logout().permitAll();
+	
 	}
-
+	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
+		auth.inMemoryAuthentication().withUser("Witek").password("a").roles("USER");
 	}
 }

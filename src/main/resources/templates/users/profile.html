@@ -3,20 +3,24 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="UTF-8" />
-<title>Twoj profil</title>
+<title>Profil</title>
 </head>
 <body>
 	Witamy
 
-	<span sec:authorize="isAuthenticated()"> | Logged user: <span
-		sec:authentication="name"></span> | Roles: <span
-		sec:authentication="principal.authorities"></span> |
+	<span sec:authorize="isAuthenticated()"> | Hello <span
+		sec:authentication="name"></span>
 
 	</span>
 	
+	<div>
+		<br/><a th:href="@{'/users/profile/add'}">Dodaj szkołę</a>
+	</div>
+	
 	<form th:action="@{/logout}" method="post">
-		<input type="submit" value="Sign Out" />
+		<input type="submit" value="Sign Out"/>
 	</form>
-
+	
+	<br/>Redirect to main page <a th:href="@{'/main'}">click here</a>
 </body>
 </html>
