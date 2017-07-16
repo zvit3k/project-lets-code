@@ -23,7 +23,7 @@ public class School {
 	private Long id;
 	private String name;
 	@OneToOne(mappedBy="school",cascade=CascadeType.PERSIST)
-	private UserProfile userProfile;
+	private User userProfile;
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "school_technology", joinColumns = { @JoinColumn(name = "school_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "technology_id") })
