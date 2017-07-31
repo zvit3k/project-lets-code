@@ -19,7 +19,6 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String username;
-	
 	private String password;
 	@Transient
 	private String confirmPassword;
@@ -34,14 +33,6 @@ public class User {
 
 	public Long getId() {
 		return id;
-	}
-
-	public String getUser() {
-		return username;
-	}
-
-	public void setUser(String username) {
-		this.username = username;
 	}
 
 	public String getPassword() {

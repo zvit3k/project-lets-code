@@ -8,5 +8,4 @@ public interface SchoolService {
 	void deleteSchool(School s);
 	School getSchoolById(Long id);
 		
-	
 }

@@ -13,22 +13,21 @@ import com.pawlak.service.UserService;
 
 @Controller
 public class RegisterController {
-	
+
 	@Autowired
-	UserService userProfileService;
-	
-	@RequestMapping(value="/register", method=RequestMethod.GET)
-	public String getRegisterForm(Model model){
-		User user  = new User();
+	UserService userService;
+
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String getRegisterForm(Model model) {
+		User user = new User();
 		model.addAttribute("user", user);
 		return "users/register";
 	}
-	
-	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public String sentRegisterForm(@ModelAttribute User user,BindingResult result, Model model){
-		userProfileService.addUser(user);
-		System.out.println(user);
+
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String sentRegisterForm(@ModelAttribute User user, BindingResult result, Model model) {
+		userService.addUser(user);
 		return "main";
 	}
-	
+
 }

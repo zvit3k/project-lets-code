@@ -13,8 +13,9 @@
 
 	</span>
 	
-	<div>
-		<br/><a th:href="@{'/users/profile/new_school'}">Dodaj szkołę</a>
+	<!--   -->
+	<div th:if="${hasSchool}==false">
+		<br/><a th:href="@{'/addschool'}">Dodaj szkołę</a>
 	</div>
 	
 	<form th:action="@{/logout}" method="post">

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Profil - dodaj szkole</title>
+</head>
+<body>
+<form action="#" th:action="@{/addschool}" th:object="${school}" method="post">
+	<table>
+		<tr>
+			<td><p>Nazwa</p></td>
+			<td><input type="text" th:field="*{name}"/></td>
+		</tr>
+		
+		<tr>
+			<td><p>Cena</p></td>
+			<td><input type="text" th:field="*{price}"/></td>	
+		</tr>
+		
+		<tr>
+			<td><p>Ilosc godzin</p></td>
+			<td><input type="text" th:field="*{numberOfHours}"/></td>	
+		</tr>
+		
+		<tr>
+			<td><p>Opis</p></td>
+			<td><input type="text" th:field="*{description}"/></td>	
+		</tr>
+		<tr>
+			<td><input type="submit" value="Submit"/></td>
+			<td><input type="reset" value="Reset"/></td>
+		</tr>
+	</table>
+</form>
+</body>
+</html>
