@@ -6,8 +6,10 @@
 <title>Zaloguj sie</title>
 </head>
 <body>
+
 	<div th:if="${param.error}">Login niepoprawny</div>
 	<div th:if="${param.logout}">Nastąpilo wylogowanie</div>
+	
 	<form th:action="@{/login}" method="post">
 		<div>
 			<label> Uzytkownik: <input type="text" name="username" /></label>

@@ -12,30 +12,31 @@
 		sec:authentication="name"></span>
 
 	</span>
-	
+
 	<!--   -->
 	<div th:if="${hasSchool}==false">
-		<br/><a th:href="@{'/addschool'}">Dodaj szkołę</a>
+		<br />
+		<a th:href="@{'/addschool'}">Dodaj szkołę</a>
 	</div>
-	
+
 	<div th:if="${hasSchool}==true">
 		<p>Moja szkoła</p>
-		
-		<table>
-			<tr th:text="${school.name}"></tr>
-			<tr th:text="${school.price}"></tr>
-			<tr th:text="${school.numberOfHours}"></tr>
-			<tr th:text="${school.avarageRating}"></tr>
-		</table>
-		
-		<br/><a th:href="@{/delete/__${school.id}__}">Usuń szkołę</a>
-		
-	</div>
-	
+		<p th:text="${school.name}"/>
+		<p th:text="${school.price}"/>
+		<p th:text="${school.numberOfHours}"/>
+		<p th:text="${school.avarageRating}"/>
+
+		<br />
+		<a th:href="@{/delete/__${school.id}__}">Usuń</a> <br />
+		<a th:href="@{/update/__${school.id}__}">Edytuj </a>
+
+		</div>
+
 	<form th:action="@{/logout}" method="post">
-		<input type="submit" value="Sign Out"/>
+		<input type="submit" value="Sign Out" />
 	</form>
-	
-	<br/>Redirect to main page <a th:href="@{'/main'}">click here</a>
+
+	<br />Redirect to main page
+	<a th:href="@{'/main'}">click here</a>
 </body>
 </html>
