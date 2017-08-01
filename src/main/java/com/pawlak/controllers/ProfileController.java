@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.pawlak.classes.School;
 import com.pawlak.classes.User;
 import com.pawlak.service.UserService;
 
@@ -28,6 +29,8 @@ public class ProfileController {
 			hasSchool = false;
 		} else {
 			hasSchool = true;
+			School school = user.getSchool();
+			model.addAttribute("school", school);
 		}
 
 		model.addAttribute("hasSchool", hasSchool);

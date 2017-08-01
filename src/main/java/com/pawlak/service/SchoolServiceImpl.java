@@ -24,8 +24,7 @@ public class SchoolServiceImpl implements SchoolService {
 
 	@Override
 	public void deleteSchool(School s) {
-		// TODO Auto-generated method stub
-
+		schoolRepository.delete(s);
 	}
 
 	@Override

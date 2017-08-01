@@ -8,7 +8,7 @@
 <body>
 	Witamy
 
-	<span sec:authorize="isAuthenticated()"> | Hello <span
+	<span sec:authorize="isAuthenticated()"> | <span
 		sec:authentication="name"></span>
 
 	</span>
@@ -16,6 +16,20 @@
 	<!--   -->
 	<div th:if="${hasSchool}==false">
 		<br/><a th:href="@{'/addschool'}">Dodaj szkołę</a>
+	</div>
+	
+	<div th:if="${hasSchool}==true">
+		<p>Moja szkoła</p>
+		
+		<table>
+			<tr th:text="${school.name}"></tr>
+			<tr th:text="${school.price}"></tr>
+			<tr th:text="${school.numberOfHours}"></tr>
+			<tr th:text="${school.avarageRating}"></tr>
+		</table>
+		
+		<br/><a th:href="@{/delete/__${school.id}__}">Usuń szkołę</a>
+		
 	</div>
 	
 	<form th:action="@{/logout}" method="post">
