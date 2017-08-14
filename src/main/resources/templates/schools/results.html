@@ -6,6 +6,14 @@
 </head>
 <body>
 <!--  accessing properties: th:text="${@environment.getProperty('myPropertyName')}" -->
+
+<div th:if="${#lists.isEmpty(wrapper.list)}">
+	<p>Niestety, nie mamy w bazie takich szkol!!! Może popełniłeś literówkę? Sprobuj ponownie!</p>
+	<br/>Redirect to main page <a th:href="@{'/main'}">click here</a>
+	<br/><a th:href="@{'/profile'}">Zaloguj</a>
+</div>
+
+<div th:unless="${#lists.isEmpty(wrapper.list)}">
 	<form action="#" th:action="@{/sort}" method="get">
 		<select name="sort">
 			<option th:each="i : ${sortingChoice}" th:value="${i}" th:text="${i}"></option>
@@ -13,6 +21,7 @@
 		<input type="hidden" name="city" th:value="${city}" /> 
 		<input type="submit" value="Sortuj" />
 	</form>
+	
 	<div>
 		<form action="#" th:action="@{/compare}" th:object="${wrapper}"
 			method="post">
@@ -46,5 +55,6 @@
 	<br/>Redirect to main page
 	<a th:href="@{'/main'}">click here</a>
 	<br/><a th:href="@{'/profile'}">Zaloguj</a>
+	</div>
 </body>
 </html>
