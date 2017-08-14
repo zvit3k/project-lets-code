@@ -80,7 +80,6 @@ public class SchoolController {
 		s.setPrice(school.getPrice());
 		s.setNumberOfHours(school.getNumberOfHours());
 		schoolService.updateSchool(s);
-		
 		return "redirect:/profile";
 	}
 }
