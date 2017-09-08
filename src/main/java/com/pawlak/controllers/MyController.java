@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -84,9 +89,32 @@ public class MyController {
 	}
 
 	@RequestMapping(value = "/addReview", method = RequestMethod.POST)
-	public String postDetails(@ModelAttribute Review review, @ModelAttribute(value = "id") Long id, Model model) {
-		School s = schoolService.getSchoolById(id);
+	public String postDetails(@Valid @ModelAttribute Review review, BindingResult result, @ModelAttribute(value = "id") Long id, Model model) {
+		
+		if(result.hasErrors()){
+			
+			List<FieldError> errors = result.getFieldErrors();
+		
+			School s = schoolService.getSchoolById(id);
 
+			List<Review> reviews = s.getReviews();
+			List<Integer> rating = new ArrayList<>(
+					Arrays.asList(new Integer(1), 
+							new Integer(2), 
+							new Integer(3), 
+							new Integer(4), 
+							new Integer(5)));
+
+			model.addAttribute("review", new Review());
+			model.addAttribute("rating", rating);
+			model.addAttribute("reviews", reviews);
+			model.addAttribute("school", s);
+			model.addAttribute("errors", errors);
+			
+			return "/schools/details";
+		}
+		
+		School s = schoolService.getSchoolById(id);
 		Calendar date = Calendar.getInstance();
 		review.setDate(date);
 		Review r = new Review(review.getNickname(), review.getUserReview(), review.getRating(), review.getDate());

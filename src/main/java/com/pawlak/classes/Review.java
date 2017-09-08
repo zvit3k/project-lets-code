@@ -11,24 +11,36 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Review {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@NotEmpty(message="wpisz autora!")
+	@NotNull
 	private String nickname;
+	@NotEmpty(message="Musisz coś wpisać")
+	@NotNull
 	private String userReview;
+	@Min(value=1, message="Jaka jest Twoja ocena? Wybierz!")
+	@Max(value=5, message="Jaka jest Twoja ocena? Wybierz!")
 	private int rating;
-	
+
 	@Column(columnDefinition = "DATE")
 	private Calendar date;
-	
+
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinColumn(name = "school_id")
 	private School school;
 
-	public Review() {}
+	public Review() {
+	}
 
 	public Review(String nickname, String userReview, int rating, Calendar date) {
 		this.nickname = nickname;
@@ -90,6 +102,5 @@ public class Review {
 		return "Review [id=" + id + ", nickname=" + nickname + ", userReview=" + userReview + ", rating=" + rating
 				+ ", date=" + date + "]";
 	}
-
 
 }

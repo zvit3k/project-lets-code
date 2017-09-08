@@ -28,11 +28,12 @@
 	</div>
 
 	<h3>Dodaj opinie o szkole</h3>
+
 	<form action="#" th:action="@{/addReview}" th:object="${review}"
 		method="post">
 		<table>
 			<tr>
-				<td>Autor</td>
+				<td>Autor:</td>
 				<td><input type="text" th:field="*{nickname}" /></td>
 			</tr>
 			<tr>
@@ -57,10 +58,15 @@
 				<td><input type="submit" value="Send" /></td>
 				<td><input type="reset" value="Reset" /></td>
 			</tr>
+
 		</table>
+
+		<div th:unless="${#lists.isEmpty(errors)}">
+			<p th:each="e : ${errors}" th:text="${e.getDefaultMessage()}" />
+		</div>
 	</form>
 
-	<br/>Back to main page
+	<br />Back to main page
 	<a th:href="@{'/main'}">click here</a>
 </body>
 </html>
