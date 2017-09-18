@@ -10,12 +10,13 @@
 <!-- BRAK PODPIETEGO CSSA! -->
 <form class="col-lg-12" action="#" th:action="@{/results}" method="get">
 	<div class="input-group input-group-lg col-sm-offset-3 col-sm-6">
-          <!-- bar -->
-		<input type="text" name="query" class="center-block form-control input-lg" title="Wyszukaj kurs." placeholder="W jakim mieście chcesz się uczyć?"/>
-          <!-- button -->
-		<span class="input-group-btn"><button class="btn btn-lg btn-primary" type="submit">Szukaj</button></span>
+    <!-- bar -->
+	<input type="text" name="query" class="center-block form-control input-lg" title="Wyszukaj kurs." placeholder="W jakim mieście chcesz się uczyć?"/>
+    <!-- button -->
+	<span class="input-group-btn"><button class="btn btn-lg btn-primary" type="submit">Szukaj</button></span>
        
 	</div>
+	
 </form>
 
 <div th:if="${#lists.isEmpty(wrapper.list)}">

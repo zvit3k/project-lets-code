@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -22,10 +21,10 @@ public class Review {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@NotEmpty(message="wpisz autora!")
+	@NotEmpty(message="Wpisz autora!") //TO DO: internalization, properties file
 	@NotNull
 	private String nickname;
-	@NotEmpty(message="Musisz coś wpisać")
+	@NotEmpty(message="Prosimy o opinie!") 
 	@NotNull
 	private String userReview;
 	@Min(value=1, message="Jaka jest Twoja ocena? Wybierz!")
@@ -102,5 +101,4 @@ public class Review {
 		return "Review [id=" + id + ", nickname=" + nickname + ", userReview=" + userReview + ", rating=" + rating
 				+ ", date=" + date + "]";
 	}
-
 }
