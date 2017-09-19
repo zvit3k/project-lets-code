@@ -19,14 +19,10 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@NotEmpty
 	private String username;
-	@NotEmpty
 	private String password;
 	@Transient
-	@NotEmpty
 	private String confirmPassword;
-	@NotEmpty
 	private String mail;
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "school_id", unique = true)
