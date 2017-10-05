@@ -30,6 +30,10 @@ public class ProfileController {
 		} else {
 			hasSchool = true;
 			School school = user.getSchool();
+			
+			
+			
+			
 			model.addAttribute("school", school);
 		}
 

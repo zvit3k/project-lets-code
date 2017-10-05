@@ -27,7 +27,7 @@ public class School {
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "school_technology", joinColumns = { @JoinColumn(name = "school_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "technology_id") })
-	private Set<Technology> technologies = new HashSet<Technology>();;
+	private Set<Technology> technologies = new HashSet<Technology>();
 	private double price;
 	private double avarageRating;
 	private int numberOfHours;
@@ -36,6 +36,12 @@ public class School {
 	@JoinTable(name = "school_course", joinColumns = { @JoinColumn(name = "school_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "course_id") })
 	private Set<CourseType> courseTypes = new HashSet<>();
+	private String description;
+	@OneToMany(mappedBy = "school")
+	private List<Review> reviews = new ArrayList<>();
+	@OneToMany(mappedBy = "school")
+	private List<Address> cities = new ArrayList<>();
+
 
 	public Set<CourseType> getCourseTypes() {
 		return courseTypes;
@@ -44,13 +50,7 @@ public class School {
 	public void setCourseTypes(Set<CourseType> courseTypes) {
 		this.courseTypes = courseTypes;
 	}
-
-	private String description;
-	@OneToMany(mappedBy = "school")
-	private List<Review> reviews = new ArrayList<>();
-	@OneToMany(mappedBy = "school")
-	private List<Address> cities = new ArrayList<>();
-
+	
 	public List<Address> getCities() {
 		return cities;
 	}

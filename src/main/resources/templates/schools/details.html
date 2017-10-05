@@ -63,7 +63,7 @@
 
 		<div th:unless="${#lists.isEmpty(errors)}">
 			<ul>
-				<li th:each="e : ${errors}"><label th:text="${e.getDefaultMessage()}"></label></li>
+				<li th:each="e : ${errors}"><label th:text="${e}"></label></li>
 			</ul>
 		</div>
 	</form>

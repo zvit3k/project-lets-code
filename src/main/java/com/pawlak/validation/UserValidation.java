@@ -3,8 +3,6 @@ package com.pawlak.validation;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
