@@ -3,18 +3,14 @@ package com.pawlak.validation;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.pawlak.classes.School;
 
 public class SchoolValidation implements Validator {
-	
-	@Autowired
-	MessageSource messageSource;
-	
+
 	@Override
 	public boolean supports(Class<?> aClass) {
 		return School.class.equals(aClass);
@@ -25,22 +21,29 @@ public class SchoolValidation implements Validator {
 
 		School school = (School) o;
 
-		if (school.getName().length() < 3 || school.getName().length() > 20 || school.getName().equals(null)) {
-			err.rejectValue("name", "Invalid name - it should contains between 3 and 20 characters.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(err, "name", "Invalid name - field must not be empty!");
+
+		if (school.getName().length() < 3) {
+			err.rejectValue("name", "Invalid name - it should contains more than 3 characters!");
 		}
 
+		ValidationUtils.rejectIfEmptyOrWhitespace(err, "price", "Invalid price - field must not be empty!");
+
 		if (school.getPrice() <= 0) {
+
 			err.rejectValue("price", "Invalid price - only positive values are allowed!");
 		}
 
 		String s = String.valueOf(school.getPrice());
 
-		Pattern pattern = Pattern.compile("[0-9]+\\.[0-9]+");
+		Pattern pattern = Pattern.compile("\\-*[0-9]+\\.[0-9]+");
 		Matcher matcher = pattern.matcher(s);
 
 		if (!matcher.matches()) {
 			err.rejectValue("price", "Invalid price - only numeric values are allowed!");
 		}
+		ValidationUtils.rejectIfEmptyOrWhitespace(err, "numberOfHours",
+				"Invalid number of hours - field must not be empty!");
 
 		if (school.getNumberOfHours() <= 0) {
 			err.rejectValue("numberOfHours", "Invalid number of hours - only positive values are allowed!");
@@ -54,5 +57,8 @@ public class SchoolValidation implements Validator {
 				return;
 			}
 		}
+
+		ValidationUtils.rejectIfEmptyOrWhitespace(err, "description", "Invalid description - field must not be empty!");
+
 	}
 }
