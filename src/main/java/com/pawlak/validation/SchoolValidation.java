@@ -24,13 +24,14 @@ public class SchoolValidation implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(err, "name", "Invalid name - field must not be empty!");
 
 		if (school.getName().length() < 3) {
+			
 			err.rejectValue("name", "Invalid name - it should contains more than 3 characters!");
 		}
 
 		ValidationUtils.rejectIfEmptyOrWhitespace(err, "price", "Invalid price - field must not be empty!");
 
 		if (school.getPrice() <= 0) {
-
+			
 			err.rejectValue("price", "Invalid price - only positive values are allowed!");
 		}
 
