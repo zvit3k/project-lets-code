@@ -1,7 +1,6 @@
 package com.pawlak.controllers;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -50,9 +49,9 @@ public class SchoolController {
 	public String sentSchoolForm(@Valid @ModelAttribute School school, BindingResult result, Model model) {
 		if(result.hasErrors()){
 
-			List<String> errors = result.getFieldErrors().stream().map(e->e.getCode()).map(e->e.toString()).collect(Collectors.toList());
+			List<FieldError> errors = result.getFieldErrors();
 
-			//TEMPORARY WORKAROUND - the ugly one			
+			/*//UGLY WORKAROUND			
 			for(int i =0; i<errors.size(); i++){
 				if(errors.get(i).equals("typeMismatch")){
 					String s = errors.get(i);
@@ -60,7 +59,7 @@ public class SchoolController {
 					errors.add(s);
 					errors.remove(i);
 				}
-			}
+			}*/
 			
 			model.addAttribute("errors", errors);
 			return "/users/school/add";

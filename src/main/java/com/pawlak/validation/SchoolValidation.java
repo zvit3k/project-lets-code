@@ -1,8 +1,12 @@
 package com.pawlak.validation;
 
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.core.env.Environment;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -10,7 +14,7 @@ import org.springframework.validation.Validator;
 import com.pawlak.classes.School;
 
 public class SchoolValidation implements Validator {
-
+	
 	@Override
 	public boolean supports(Class<?> aClass) {
 		return School.class.equals(aClass);
@@ -21,13 +25,7 @@ public class SchoolValidation implements Validator {
 
 		School school = (School) o;
 
-		ValidationUtils.rejectIfEmptyOrWhitespace(err, "name", "Invalid name - field must not be empty!");
-
-		if (school.getName().length() < 3) {
-			
-			err.rejectValue("name", "Invalid name - it should contains more than 3 characters!");
-		}
-
+		ValidationUtils.rejectIfEmptyOrWhitespace(err, "name", "error_code", "Invalid name - it should contains more than 3 characters!");
 		ValidationUtils.rejectIfEmptyOrWhitespace(err, "price", "Invalid price - field must not be empty!");
 
 		if (school.getPrice() <= 0) {
