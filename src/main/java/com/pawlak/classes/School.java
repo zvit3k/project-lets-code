@@ -15,33 +15,48 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.pawlak.validation.SchoolName;
+import com.pawlak.validation.SchoolPrice;
 
 @Entity
 public class School {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@SchoolName
+	@NotEmpty(message="{NotEmpty.school.name}")
+	@NotBlank(message="{NotBlank.school.name}")
 	private String name;
-	@OneToOne(mappedBy="school",cascade=CascadeType.PERSIST)
+	@OneToOne(mappedBy = "school", cascade = CascadeType.PERSIST)
 	private User user;
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "school_technology", joinColumns = { @JoinColumn(name = "school_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "technology_id") })
 	private Set<Technology> technologies = new HashSet<Technology>();
+	
+	@Min(value=0, message="{Min.school.price}")
+	@SchoolPrice
 	private double price;
 	private double avarageRating;
+	@Min(value=0, message="{Min.school.hours}")
+	@SchoolHours
 	private int numberOfHours;
-
+	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "school_course", joinColumns = { @JoinColumn(name = "school_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "course_id") })
 	private Set<CourseType> courseTypes = new HashSet<>();
+	
 	private String description;
 	@OneToMany(mappedBy = "school")
 	private List<Review> reviews = new ArrayList<>();
 	@OneToMany(mappedBy = "school")
 	private List<Address> cities = new ArrayList<>();
-
 
 	public Set<CourseType> getCourseTypes() {
 		return courseTypes;
@@ -50,7 +65,7 @@ public class School {
 	public void setCourseTypes(Set<CourseType> courseTypes) {
 		this.courseTypes = courseTypes;
 	}
-	
+
 	public List<Address> getCities() {
 		return cities;
 	}
@@ -60,7 +75,7 @@ public class School {
 	}
 
 	public void setAvarageRating(double avarageRating) {
-		this.avarageRating=avarageRating;
+		this.avarageRating = avarageRating;
 	}
 
 	public void setCities(List<Address> cities) {
