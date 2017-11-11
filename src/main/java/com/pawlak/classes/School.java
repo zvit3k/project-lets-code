@@ -20,6 +20,7 @@ import javax.validation.constraints.Min;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.pawlak.validation.SchoolHours;
 import com.pawlak.validation.SchoolName;
 import com.pawlak.validation.SchoolPrice;
 

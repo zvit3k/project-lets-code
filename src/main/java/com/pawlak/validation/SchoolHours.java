@@ -1,4 +1,4 @@
-package com.pawlak.classes;
+package com.pawlak.validation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

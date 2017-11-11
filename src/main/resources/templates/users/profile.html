@@ -20,15 +20,23 @@
 	</div>
 
 	<div th:if="${hasSchool}==true">
-		<p>Moja szkoła</p>
+		<p>Moja szkoła:</p>
 		<p th:text="${school.name}"/>
 		<p th:text="${school.price}"/>
 		<p th:text="${school.numberOfHours}"/>
 		<p th:text="${school.avarageRating}"/>
 
+		<br/>
+		<a th:href="@{/addaddress}">Dodaj adres</a>
+		
+		<br/>
+		<a th:href="@{/adddetails}">Dodaj szczegóły</a>
+
 		<br />
-		<a th:href="@{/delete/__${school.id}__}">Usuń</a> <br />
-		<a th:href="@{/update/__${school.id}__}">Edytuj </a>
+		<a th:href="@{/delete/__${school.id}__}">Usuń szkołę</a> <br />
+		<a th:href="@{/update/__${school.id}__}">Edytuj szkołę </a>
+		
+		
 	</div>
 
 	<form th:action="@{/logout}" method="post">

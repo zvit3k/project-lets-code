@@ -1,4 +1,4 @@
-package com.pawlak.classes;
+package com.pawlak.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
