@@ -24,6 +24,7 @@ import com.pawlak.service.SchoolService;
 import com.pawlak.service.UserService;
 
 @Controller
+@RequestMapping(value = "/school")
 public class SchoolController {
 
 	private SchoolService schoolService;
@@ -36,14 +37,14 @@ public class SchoolController {
 		this.addressService = addressService;
 	}
 
-	@RequestMapping(value = "/addschool", method = RequestMethod.GET)
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String getSchoolForm(Model model) {
 		School school = new School();
 		model.addAttribute("school", school);
 		return "/users/school/add";
 	}
 
-	@RequestMapping(value = "/addschool", method = RequestMethod.POST)
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String sentSchoolForm(@Valid @ModelAttribute School school, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			List<FieldError> errors = result.getFieldErrors();
@@ -67,6 +68,10 @@ public class SchoolController {
 
 		School school = schoolService.getSchoolById(id);
 		userService.updateUser(user);
+
+		List<Address> addresses = addressService.getAddressesBySchoolId(id);
+
+		addresses.forEach(e -> e.setSchool(null));
 		schoolService.deleteSchool(school);
 
 		return "redirect:/profile";
@@ -79,7 +84,7 @@ public class SchoolController {
 		return "users/school/update";
 	}
 
-	@RequestMapping(value = "/updateS", method = RequestMethod.POST)
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String sentUpdateSchool(@ModelAttribute School school, BindingResult result, Model model) {
 		School s = getUser().getSchool();
 		s.setName(school.getName());
@@ -87,29 +92,6 @@ public class SchoolController {
 		s.setPrice(school.getPrice());
 		s.setNumberOfHours(school.getNumberOfHours());
 		schoolService.updateSchool(s);
-		return "redirect:/profile";
-	}
-
-	@RequestMapping(value = "/addaddress", method = RequestMethod.GET)
-	public String newSchoolAddress(Model model) {
-		Address address = new Address();
-		model.addAttribute("address", address);
-		return "users/address/add";
-	}
-
-	@RequestMapping(value = "/addaddress", method = RequestMethod.POST)
-	public String addSchoolAddress(Address address, BindingResult result, Model model) {
-
-		if (result.hasErrors()) {
-			List<FieldError> errors = result.getFieldErrors();
-			model.addAttribute("errors", errors);
-			return "/users/address/add";
-		}
-
-		School s = getUser().getSchool();
-		address.setSchool(s);
-		addressService.addAddress(address);
-
 		return "redirect:/profile";
 	}
 

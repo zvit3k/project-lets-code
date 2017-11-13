@@ -8,4 +8,5 @@ public interface AddressService {
 	void addAddress(Address s);
 	void deleteAddress(Address s);
 	List<Address> getAddressesEquals(String city);
+	List<Address> getAddressesBySchoolId(Long id);
 }

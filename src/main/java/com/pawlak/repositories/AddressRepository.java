@@ -8,4 +8,5 @@ import com.pawlak.classes.Address;
 
 public interface AddressRepository extends JpaRepository<Address, Integer>{
 	List<Address> findByCityEquals(String city);
+	List<Address> findBySchoolId(Long id);
 }

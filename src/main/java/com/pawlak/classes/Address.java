@@ -8,16 +8,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Pattern;
 
-
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Address {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	@NotEmpty(message="{NotEmpty.address.city}")
 	private String city;
+	@NotEmpty(message="{NotEmpty.address.street}")
 	private String street;
+	@NotEmpty(message="{NotEmpty.address.postalCode}")
+	@Pattern(regexp="[0-9]{2}-[0-9]{3}", message="{Pattern.address.postalCode}")
 	private String postalCode;
 	@ManyToOne(cascade = CascadeType.PERSIST,fetch=FetchType.LAZY)
 	@JoinColumn(name="school_id")

@@ -15,35 +15,30 @@
 
 	<!--   -->
 	<div th:if="${hasSchool}==false">
-		<br />
-		<a th:href="@{'/addschool'}">Dodaj szkołę</a>
+		<br /> <a th:href="@{/school/add}">Dodaj szkołę</a>
 	</div>
 
 	<div th:if="${hasSchool}==true">
+
 		<p>Moja szkoła:</p>
-		<p th:text="${school.name}"/>
-		<p th:text="${school.price}"/>
-		<p th:text="${school.numberOfHours}"/>
-		<p th:text="${school.avarageRating}"/>
+		<p th:text="${school.name}" />
+		<p th:text="${school.price}" />
+		<p th:text="${school.numberOfHours}" />
+		<p th:text="${school.avarageRating}" />
 
-		<br/>
-		<a th:href="@{/addaddress}">Dodaj adres</a>
-		
-		<br/>
-		<a th:href="@{/adddetails}">Dodaj szczegóły</a>
+		<br /> <a th:href="@{/address/add}">Dodaj adres</a> <br /> <a
+			th:href="@{/details/add}">Dodaj szczegóły</a> <br /> <a
+			th:href="@{/school/delete/__${school.id}__}">Usuń szkołę</a> <br />
+		<a th:href="@{/school/update/__${school.id}__}">Edytuj szkołę </a>
 
-		<br />
-		<a th:href="@{/delete/__${school.id}__}">Usuń szkołę</a> <br />
-		<a th:href="@{/update/__${school.id}__}">Edytuj szkołę </a>
-		
-		
+
 	</div>
 
 	<form th:action="@{/logout}" method="post">
 		<input type="submit" value="Sign Out" />
 	</form>
 
-	<br/>Redirect to main page
+	<br />Redirect to main page
 	<a th:href="@{'/main'}">click here</a>
 </body>
 </html>
