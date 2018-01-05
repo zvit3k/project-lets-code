@@ -20,6 +20,7 @@ public class CourseType {
 	private Set<School> schools = new HashSet<>();
 
 	public CourseType() {
+		
 	}
 	
 	public CourseType(String courseType) {

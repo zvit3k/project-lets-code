@@ -52,7 +52,7 @@ public class Technology {
 
 	@Override
 	public String toString() {
-		return "Technology [id=" + id + ", technology=" + technology + ", schools=" + schools + "]";
+		return this.getTechnology();
 	}
 
 

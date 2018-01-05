@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title></title>
+</head>
+<body>
+	<p>Dodaj szczegóły:</p>
+	<form action="#" th:action="@{/det/add}" th:object="${wrapper}"
+		method="post">
+		<table>
+			<tr>
+				<td>Wybierz technologie:</td>
+				<td>
+					<ul>
+						<li th:each="t : ${technologies}"><input type="checkbox"
+							th:field="*{technologies}" th:value="${t}" /> <label
+							th:text="${t}"></label></li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td>Wybierz formę zajęć:</td>
+				<td>
+					<ul>
+						<li th:each="c : ${types}"><input type="checkbox"
+							th:field="*{types]}" th:value="${c}" /> <label
+							th:text="${c}"></label></li>
+					</ul>
+				</td>
+			</tr>
+
+			<tr>
+				<td><input type="submit" value="Submit" /></td>
+			</tr>
+		</table>
+	</form>
+
+	<div th:unless="${#lists.isEmpty(errors)}">
+		<ul>
+			<li th:each="e : ${errors}"><label
+				th:text="${e.getDefaultMessage()}"></label></li>
+		</ul>
+	</div>
+
+</body>
+</html>
